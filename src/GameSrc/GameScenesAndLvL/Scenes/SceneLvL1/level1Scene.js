@@ -57,13 +57,24 @@ export default class Level1Scene extends Phaser.Scene {
         this.physics.add.collider(this.player.playerPaddle, this.map1.rightBorder);
     };
 
+    
     update(time, delta) {
         this.map1.update();
         this.player.update();
         this.normalBall.update(time, delta);
-
+        
         this.NormalStonePool.forEach(stone => {
             stone.update();
-        })
+        });
+        this.updatePools();
+        if (this.NormalStonePool == 0 && this.RedStonePool == 0) {
+            //IF MAP GOAL IS REACHED FIRE THE UI EVENT TO STOP CURRENT GAME SCENE!!!!!!!!!!!!!!
+            //NEED TO IMPLEMENT!!!! :-)
+        };
+        
     };
+    updatePools() {
+        this.NormalStonePool = this.NormalStonePool.filter((ball) => ball.isDestroyed != true);
+        this.RedStonePool = this.RedStonePool.filter((ball) => ball.isDestroyed != true);
+    }
 };
