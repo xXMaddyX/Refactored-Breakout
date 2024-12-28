@@ -1,5 +1,5 @@
 import Phaser from "phaser";
-import NormalBallObj from "../GameObjects/Balls/NormalBall.js";
+import NormalBallObj from "../GameObjects/Balls/NormalBall/NormalBall.js";
 import NormalStone from "../GameObjects/Stones/NormalStone.js";
 import RedStone from "../GameObjects/Stones/RedStones.js";
 

@@ -2,7 +2,7 @@ import Phaser from "phaser";
 import Map1 from "../../Worlds/LvL1/map1.js";
 import Player from "../../../GameObjects/Player/Player.js";
 import UserInterface from "../../../UI/UserInterface.js";
-import NormalBallObj from "../../../GameObjects/Balls/NormalBall.js";
+import NormalBallObj from "../../../GameObjects/Balls/NormalBall/NormalBall.js";
 import RedStone from "../../../GameObjects/Stones/RedStones.js";
 import StoneGenerator from "../../../CoreSystem/StoneGenerator.js";
 import NormalStone from "../../../GameObjects/Stones/NormalStone.js";
@@ -10,7 +10,7 @@ import { stoneConfig } from "./level1Config.js";
 
 export default class Level1Scene extends Phaser.Scene {
     constructor() {
-        super({key: "Level1Scene"});
+        super();
 
         this.NormalStonePool = [];
         this.RedStonePool = [];
@@ -37,8 +37,8 @@ export default class Level1Scene extends Phaser.Scene {
         this.normalBall = new NormalBallObj(this);
         this.normalBall.create();
         this.player.addBallRef(this.normalBall);
-        this.normalBall.addPlayerRef(this.player);
-        this.addNormalBallCollider();
+        this.normalBall.addPlayerRef(this.player, this.map1);
+        this.normalBall.addNormalBallCollider();
 
         this.UI = new UserInterface(this);
         this.UI.create();
@@ -56,30 +56,6 @@ export default class Level1Scene extends Phaser.Scene {
         this.physics.add.collider(this.player.playerPaddle, this.map1.leftBoder);
         this.physics.add.collider(this.player.playerPaddle, this.map1.rightBorder);
     };
-
-    addNormalBallCollider() {
-        this.physics.add.overlap(this.normalBall.normalBall, this.map1.leftBoder, () => {
-            this.normalBall.currentMoveDirectionX = this.normalBall.BALL_MOVE_X.RIGHT;
-            this.normalBall.playSound("ball-hit-wall");
-        });
-        this.physics.add.overlap(this.normalBall.normalBall, this.map1.rightBorder, () => {
-            this.normalBall.currentMoveDirectionX = this.normalBall.BALL_MOVE_X.LEFT;
-            this.normalBall.playSound("ball-hit-wall");
-        })
-
-        this.physics.add.overlap(this.player.playerPaddle, this.normalBall.normalBall, () => {
-            this.normalBall.currentMoveDirectionY = this.normalBall.BALL_MOVE_Y.UP;
-            this.player.glowTrigger();
-            this.normalBall.playSound("ball-hit-stone");
-            this.time.delayedCall(100, () => {
-                this.player.glowTrigger()
-            })
-        });
-        this.physics.add.overlap(this.normalBall.normalBall, this.map1.topBorder, () => {
-            this.normalBall.currentMoveDirectionY = this.normalBall.BALL_MOVE_Y.DOWN;
-            this.normalBall.playSound("ball-hit-wall");
-        })
-    }
 
     update(time, delta) {
         this.map1.update();

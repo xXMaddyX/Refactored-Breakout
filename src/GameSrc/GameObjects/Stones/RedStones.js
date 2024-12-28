@@ -1,5 +1,5 @@
 import Phaser from "phaser";
-import NormalBallObj from "../Balls/NormalBall";
+import NormalBallObj from "../Balls/NormalBall/NormalBall";
 import { RedStoneSprite, NormalStoneHitAudio } from "../../CoreSystem/AssetLoader";
 
 export default class RedStone {

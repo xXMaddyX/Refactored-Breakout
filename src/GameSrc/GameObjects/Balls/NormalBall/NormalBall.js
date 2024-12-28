@@ -1,6 +1,8 @@
-import Phaser, { RIGHT } from "phaser";
-import Player from "../Player/Player.js";
-import { NormalBall, BallHitStone, BallHitWall } from "../../CoreSystem/AssetLoader.js";
+import Phaser from "phaser";
+import Player from "../../Player/Player.js";
+import NormalBallMoveHandler from "./NormalBallMoveHandler.js";
+import NormalBallColliders from "./NormalBallColliders.js";
+import { NormalBall, BallHitStone, BallHitWall } from "../../../CoreSystem/AssetLoader.js";
 
 const KEYS = {
     NORMAL_BALL: "normal-ball",
@@ -29,22 +31,8 @@ export default class NormalBallObj {
             UP: -1,
             DEFAULT_DOWN: 1,
             DOWN: 1
-        }
+        };
         this.currentMoveDirectionY = null;
-    }
-
-    changeSpeedRandom() {
-        let newVerticalSpeedRight = Phaser.Math.RND.pick([1.5, 2, 1.1, 1.0]);
-        this.BALL_MOVE_X.RIGHT = newVerticalSpeedRight;
-
-        let newVerticalSpeedLeft = Phaser.Math.RND.pick([-1.5, -2, -1.1, -1.0]);
-        this.BALL_MOVE_X.LEFT = newVerticalSpeedLeft;
-
-        let newHorizontalSpeedDown = Phaser.Math.RND.pick([1.5, 2, 1.1, 1.0]);
-        this.BALL_MOVE_Y.DOWN = newHorizontalSpeedDown;
-
-        let newHorizontalSpeedUP = Phaser.Math.RND.pick([-1.5, -2, -1.1, -1.0]);
-        this.BALL_MOVE_Y.UP = newHorizontalSpeedUP;
     };
 
     /**Loads the Sprite Objects */
@@ -52,27 +40,40 @@ export default class NormalBallObj {
         /**@type {Phaser.Scene} */
         let scene = sceneIn;
         if (!scene.textures.exists(KEYS.NORMAL_BALL)) scene.load.image(KEYS.NORMAL_BALL, NormalBall);
-
+        
         scene.load.audio(KEYS.BALL_HIT_STONE_AUDIO, BallHitStone);
         scene.load.audio(KEYS.BALL_HIT_WALL_AUDIO, BallHitWall);
-    }
-
+    };
+    
     /**Create the Ball Game Object */
     create() {
         this.normalBall = this.scene.physics.add.sprite(0, 0, KEYS.NORMAL_BALL);
         this.normalBall.scale = this.normalBall.scale / 6
-
+        
         this.glow = this.normalBall.postFX.addGlow("0x39FF14" , 0, undefined, undefined, undefined, 20)
         this.normalBall.postFX.addShadow(-1, 1, 0.02)
-
+        
         this.ballHitStoneAudio = this.scene.sound.add(KEYS.BALL_HIT_STONE_AUDIO);
         this.ballHitWallAudio = this.scene.sound.add(KEYS.BALL_HIT_WALL_AUDIO);
-    }
-
-    addPlayerRef(playerRef) {
+    };
+    
+    addPlayerRef(playerRef, mapRef) {
         /**@type {Player} */
         this.playerRef = playerRef;
-    }
+        this.mapRef = mapRef;
+    };
+    
+    addNormalBallCollider() {
+        NormalBallColliders.addCollider(this);
+    };
+
+    changeSpeedRandom() {
+        NormalBallMoveHandler.changeSpeedRandom(this);
+    };
+    
+    invertBallVelocityDirection() {
+        NormalBallMoveHandler.invertBallVelocityDirection(this);
+    };
 
     playSound(soundToPlay) {
         switch (soundToPlay) {
@@ -86,73 +87,10 @@ export default class NormalBallObj {
         };
     };
 
-    checkBallMove() {
-        switch (this.currentMoveDirectionX) {
-            case this.BALL_MOVE_X.LEFT:
-                this.normalBall.setVelocityX(this.BALL_MOVE_X.LEFT * this.SPEED);
-                break;
-            
-            case this.BALL_MOVE_X.RIGHT:
-                this.normalBall.setVelocityX(this.BALL_MOVE_X.RIGHT * this.SPEED);
-                break;
-        };
-        switch (this.currentMoveDirectionY) {
-            case this.BALL_MOVE_Y.DOWN:
-                this.normalBall.setVelocityY(this.BALL_MOVE_Y.DOWN * this.SPEED);
-                break;
-
-            case this.BALL_MOVE_Y.UP:
-                this.normalBall.setVelocityY(this.BALL_MOVE_Y.UP * this.SPEED);
-                break;
-        }
-    }
-
-    /**Direction Must Be A string of "UP", "DOWN", "LEFT", "RIGHT."
-     * 
-     * Set the Factor By 1.1, 1.5 etc.
-     */
-    changeBallSpeedFactor(direction, value) {
-        switch (direction) {
-            case "UP":
-                this.BALL_MOVE_Y.UP = value;
-                break;
-            case "DOWN":
-                this.BALL_MOVE_Y.DOWN = value;
-                break;
-            case "LEFT":
-                this.BALL_MOVE_X.LEFT = value;
-                break;
-            case "RIGHT":
-                this.BALL_MOVE_X.RIGHT = value;
-                break;
-        };
-    };
-
-    /**Resets the Ball Speed Factors of Indicators to DEFAULT */
-    resetBallSpeedFactors() {
-        this.BALL_MOVE_X.LEFT = this.BALL_MOVE_X.DEFAULT_LEFT;
-        this.BALL_MOVE_X.RIGHT = this.BALL_MOVE_X.DEFAULT_RIGHT;
-        this.BALL_MOVE_Y.DOWN = this.BALL_MOVE_Y.DEFAULT_DOWN;
-        this.BALL_MOVE_Y.UP = this.BALL_MOVE_Y.DEFAULT_UP;
-    };
-
     /**Inverts the Ball Move in the Opposite Direction UP and DOWN.
      * 
      * Also Changes LEFT and RIGHT Randomly, (It should use at collition!!!)
      */
-    invertBallVelocityDirection() {
-        if (this.currentMoveDirectionY === this.BALL_MOVE_Y.DOWN) {
-            this.normalBall.setVelocityY(this.BALL_MOVE_Y.UP * this.SPEED);
-            this.currentMoveDirectionY = this.BALL_MOVE_Y.UP;
-        } else if (this.currentMoveDirectionY === this.BALL_MOVE_Y.UP) {
-            this.normalBall.setVelocityY(this.BALL_MOVE_Y.DOWN * this.SPEED);
-            this.currentMoveDirectionY = this.BALL_MOVE_Y.DOWN;
-        }
-    
-        const newDirection = Phaser.Math.RND.pick([this.BALL_MOVE_X.LEFT, this.BALL_MOVE_X.RIGHT]);
-        this.normalBall.setVelocityX(newDirection * this.SPEED);
-        this.currentMoveDirectionX = newDirection;
-    }
 
     glowChanger(delta) {
         if (this.glow.outerStrength === undefined) {
@@ -189,7 +127,7 @@ export default class NormalBallObj {
     }
     
     update(time, delta) {
-        this.checkBallMove();
+        NormalBallMoveHandler.checkBallMove(this);
         this.glowChanger(delta);
         this.checkIfBallIsfired();
     }
