@@ -1,4 +1,4 @@
-import { app, BrowserWindow } from 'electron';
+import { app, BrowserWindow, ipcMain } from 'electron';
 import path from 'node:path';
 import started from 'electron-squirrel-startup';
 
@@ -41,6 +41,10 @@ app.whenReady().then(() => {
       createWindow();
     }
   });
+});
+
+ipcMain.on("quit-game", () => {
+  app.quit();
 });
 
 // Quit when all windows are closed, except on macOS. There, it's common

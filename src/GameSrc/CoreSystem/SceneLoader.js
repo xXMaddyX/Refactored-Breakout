@@ -1,4 +1,5 @@
 import Phaser from "phaser";
+import TitelScene from "../GameScenesAndLvL/Scenes/TitelScene/TitelScene.js";
 import Level1Scene from "../GameScenesAndLvL/Scenes/SceneLvL1/level1Scene.js";
 
 export default class SceneLoader{
@@ -7,11 +8,19 @@ export default class SceneLoader{
         this.scene = scene;
     };
 
+    loadTitelScene(oldScene) {
+        this.titelScene = this.scene.scene.add("TitelScene", TitelScene, true);
+        this.scene.scene.launch("TitelScene");
+        if (oldScene) {
+            this.scene.scene.remove(oldScene);
+        }
+    };
+
     loadLevel1(oldScene) {
         this.level1 = this.scene.scene.add("SceneLvL1", Level1Scene, true);
         this.scene.scene.launch("SceneLvL1");
         if (oldScene) {
-            oldScene.remove();
+            this.scene.scene.remove(oldScene);
         }
     }
 }

@@ -11,7 +11,7 @@ export default class MainScene extends Phaser.Scene {
     }
 
     initOnStartup() {
-        this.sceneLoader.loadLevel1();
+        this.sceneLoader.loadTitelScene();
     };
 
     changeScene(sceneToStop, newScene) {

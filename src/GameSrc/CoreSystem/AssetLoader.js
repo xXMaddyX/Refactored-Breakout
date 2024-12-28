@@ -11,6 +11,12 @@ import NormalStoneSprite from "../Assets/SpriteAssets/Stones/StoneGreen.png";
 import RedStoneSprite from "../Assets/SpriteAssets/Stones/RedStone.png";
 import NormalStoneHitAudio from "../Assets/AudioAssets/BallAudios/hitNormalStone.wav";
 
+//Titel Sceen Imports
+import TitelBackgroundSprite from "../Assets/SpriteAssets/TitelScreenAssets/TitelBackground.png";
+import TitelOptionSprite from "../Assets/SpriteAssets/TitelScreenAssets/Option.png";
+import TitelStartSprite from "../Assets/SpriteAssets/TitelScreenAssets/Start.png";
+import TitelQuitSprite from "../Assets/SpriteAssets/TitelScreenAssets/Quit.png";
+
 //Level1 Imports
 import BackgroundLvL1 from "../Assets/SpriteAssets/Backgrounds/scene-Sheet.png";
 import LvL1Music from "../Assets/AudioAssets/LvLAudios/PiepsBreakout.wav";
@@ -18,12 +24,20 @@ import LvL1Music from "../Assets/AudioAssets/LvLAudios/PiepsBreakout.wav";
 
 export {
     PlayerNormalPaddel,
+
     NormalBall,
     BallHitWall,
     BallHitStone,
+
     NormalStoneSprite,
     RedStoneSprite,
     NormalStoneHitAudio,
+
+    TitelBackgroundSprite,
+    TitelOptionSprite,
+    TitelQuitSprite,
+    TitelStartSprite,
+
     BackgroundLvL1,
     LvL1Music
 }

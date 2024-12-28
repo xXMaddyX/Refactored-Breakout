@@ -87,11 +87,6 @@ export default class NormalBallObj {
         };
     };
 
-    /**Inverts the Ball Move in the Opposite Direction UP and DOWN.
-     * 
-     * Also Changes LEFT and RIGHT Randomly, (It should use at collition!!!)
-     */
-
     glowChanger(delta) {
         if (this.glow.outerStrength === undefined) {
             this.glow.outerStrength = 0;
