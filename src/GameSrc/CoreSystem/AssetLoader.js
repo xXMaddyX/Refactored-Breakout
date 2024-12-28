@@ -9,6 +9,7 @@ import BallHitStone from "../Assets/AudioAssets/BallAudios/BallHitStone.wav";
 //Stone Imports
 import NormalStoneSprite from "../Assets/SpriteAssets/Stones/StoneGreen.png";
 import RedStoneSprite from "../Assets/SpriteAssets/Stones/RedStone.png";
+import SolidRedStoneSprite from "../Assets/SpriteAssets/Stones/SolidStoneRed.png";
 import NormalStoneHitAudio from "../Assets/AudioAssets/BallAudios/hitNormalStone.wav";
 
 //Titel Sceen Imports
@@ -31,6 +32,7 @@ export {
 
     NormalStoneSprite,
     RedStoneSprite,
+    SolidRedStoneSprite,
     NormalStoneHitAudio,
 
     TitelBackgroundSprite,

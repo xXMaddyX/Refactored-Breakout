@@ -14,10 +14,10 @@ export default class RedStone {
 
     };
     static loadSprites(sceneIn) {
-            /**@type {Phaser.Scene} */
-            let scene = sceneIn;
-            this.spriteRef = scene.load.image("red-stone", RedStoneSprite);
-            scene.load.audio("red-stone-audio", NormalStoneHitAudio);
+        /**@type {Phaser.Scene} */
+        let scene = sceneIn;
+        this.spriteRef = scene.load.image("red-stone", RedStoneSprite);
+        scene.load.audio("red-stone-audio", NormalStoneHitAudio);
     };
 
     takeDamage() {
@@ -56,7 +56,6 @@ export default class RedStone {
     };
 
     create(x, y, scale, depth) {
-        console.log(this.scene.textures.exists("red-stone"))
         this.redStone = this.scene.physics.add.sprite(x, y, "red-stone");
         this.redStone.setScale(scale);
         this.redStone.setDepth(depth);

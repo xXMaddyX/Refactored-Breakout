@@ -57,7 +57,6 @@ export default class NormalStone {
     }
 
     create(x, y, scale, depth) {
-        console.log(this.scene.textures.exists("normal-stone"))
         this.normalStone = this.scene.physics.add.sprite(x, y, "normal-stone");
         this.normalStone.setScale(scale);
         this.normalStone.setDepth(depth);
