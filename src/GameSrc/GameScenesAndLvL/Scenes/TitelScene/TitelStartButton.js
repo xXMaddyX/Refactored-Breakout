@@ -61,5 +61,5 @@ export default class TitelButtons {
         titelScene.quitButton.on("pointerout", () => {
             titelScene.quitButtonGlow.active = false;
         });
-    }
-}
+    };
+};

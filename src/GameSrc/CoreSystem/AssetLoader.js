@@ -1,5 +1,6 @@
 //Player Sprite Imports
 import PlayerNormalPaddel from "../Assets/SpriteAssets/playerAssets/paddle.png";
+import PlayerPaddelSheet from "../Assets/SpriteAssets/playerAssets/PaddelBreak.png";
 
 //Ball Sprite Imports
 import NormalBall from "../Assets/SpriteAssets/playerAssets/NormalBall.png";
@@ -17,6 +18,7 @@ import UI_Crushed_it from "../Assets/SpriteAssets/UI/Crushed_it.png";
 import ScoreBordSprite from "../Assets/SpriteAssets/UI/Highscore.png";
 
 //Main Scene Imports
+import LoadingAnimationSprite from "../Assets/MainSceneAssets/LoadingAnimation.png";
 import PauseSprite from "../Assets/MainSceneAssets/Pause.png";
 
 //Titel Sceen Imports
@@ -32,6 +34,7 @@ import LvL1Music from "../Assets/AudioAssets/LvLAudios/PiepsBreakout.wav";
 
 export {
     PlayerNormalPaddel,
+    PlayerPaddelSheet,
 
     NormalBall,
     BallHitWall,
@@ -40,6 +43,7 @@ export {
     UI_Crushed_it,
     ScoreBordSprite,
     PauseSprite,
+    LoadingAnimationSprite,
 
     NormalStoneSprite,
     RedStoneSprite,

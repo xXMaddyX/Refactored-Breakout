@@ -18,5 +18,5 @@ export default class Level2Scene extends Phaser.Scene {
 
     update(time, delta) {
 
-    }
-}
+    };
+};

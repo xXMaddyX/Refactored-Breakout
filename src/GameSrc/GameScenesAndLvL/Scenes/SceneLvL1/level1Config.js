@@ -59,8 +59,8 @@ const stoneConfig = {
         {x: 1550, y: 450, scale: 0.2, depth: 0},
         {x: 1750, y: 450, scale: 0.2, depth: 0},
     ],
-}
+};
 
 export {
     stoneConfig,
-}
+};

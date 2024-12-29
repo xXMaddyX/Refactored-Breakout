@@ -8,6 +8,7 @@ export default class Map1 {
         this.scene = scene;
         this.yCenter = 540;
         this.xCenter = 960;
+        this.isAudioStoped = false
     };
 
     static loadSprites(sceneIn) {
@@ -51,6 +52,8 @@ export default class Map1 {
     };
 
     update() {
-        this.playAudio();
+        if (this.audio && !this.isAudioStoped) {
+            this.playAudio();
+        };
     };
 };

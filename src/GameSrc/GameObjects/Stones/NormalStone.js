@@ -12,7 +12,6 @@ export default class NormalStone {
         this.iscollidet = false;
         this.score = 50;
         this.colliderPool = [];
-
     };
 
     static loadSprites(sceneIn) {
@@ -35,8 +34,8 @@ export default class NormalStone {
             this.isDestroyed = true;
         } else {
             return;
-        }
-    }
+        };
+    };
 
     addOverlapBall(firstObjRef) {
         /**@type {NormalBallObj} */
@@ -62,7 +61,7 @@ export default class NormalStone {
         this.normalStone = this.scene.physics.add.sprite(x, y, "normal-stone");
         this.normalStone.setScale(scale);
         this.normalStone.setDepth(depth);
-        this.normalStone.postFX.addShadow(-1, 1, 0.015)
+        this.normalStone.postFX.addShadow(-1, 1, 0.015);
 
         this.hitAudio = this.scene.sound.add("normal-stone-audio");
     };

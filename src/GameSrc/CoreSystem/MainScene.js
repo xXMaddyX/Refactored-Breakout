@@ -1,6 +1,7 @@
 import Phaser from "phaser"
 import SceneLoader from "./SceneLoader.js";
 import GAME_DATA from "./MainGameHandler.js";
+import { LoadingAnimationSprite } from "./AssetLoader.js";
 import UserInterface from "../UI/UserInterface.js";
 
 export default class MainScene extends Phaser.Scene {
@@ -16,8 +17,11 @@ export default class MainScene extends Phaser.Scene {
     };
 
     preload() {
+        if (!this.textures.exists("loading-Anim")) this.load.spritesheet("loading-Anim", LoadingAnimationSprite, {
+            frameWidth: 200, frameHeight: 200
+        });
+    };
 
-    }
 
     initOnStartup() {
         this.sceneLoader.loadTitelScene();
@@ -34,7 +38,17 @@ export default class MainScene extends Phaser.Scene {
         this.initOnStartup();
         GAME_DATA.SCENE_REFS.MAIN_SCENE_REF = this;
 
-        this.LoadingText = this.add.text(960 -250, 540, "Loading----->>>>").setFontSize(50)
+        this.anims.create({
+            key: "loading-animation",
+            frames: this.anims.generateFrameNumbers("loading-Anim", {
+                start: 0,
+                end: 12
+            }),
+            frameRate: 40,
+            repeat: -1
+        });
+        this.LoadingAnim = this.add.sprite(1850, 1020).setScale(0.5);
+        this.LoadingAnim.anims.play("loading-animation");
 
         this.gamePauseButton = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ESC);
     };

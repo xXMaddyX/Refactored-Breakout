@@ -109,7 +109,20 @@ export default class NormalBallObj {
     }
     
     fireBall() {
-        this.currentMoveDirectionX = this.BALL_MOVE_X.RIGHT;
+        this.BALL_MOVE_X.UP = -1;
+        if (this.playerRef.currentMoveState == this.playerRef.MOVE_STATES.HOLD) {
+            this.BALL_MOVE_X.LEFT = 0;
+            this.BALL_MOVE_X.RIGHT = 0;
+        } else if (this.playerRef.currentMoveState == this.playerRef.MOVE_STATES.LEFT) {
+            this.BALL_MOVE_X.LEFT = -2;
+            this.currentMoveDirectionX = this.BALL_MOVE_X.LEFT;
+            
+            
+        } else if (this.playerRef.currentMoveState == this.playerRef.MOVE_STATES.RIGHT){
+            this.BALL_MOVE_X.RIGHT = 2;
+            this.currentMoveDirectionX = this.BALL_MOVE_X.RIGHT;
+            
+        }
         this.currentMoveDirectionY = this.BALL_MOVE_Y.UP;
         this.BALL_IS_FIRED = true;
     }

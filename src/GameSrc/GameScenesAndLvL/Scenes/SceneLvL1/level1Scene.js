@@ -9,7 +9,6 @@ import StoneGenerator from "../../../CoreSystem/StoneGenerator.js";
 import NormalStone from "../../../GameObjects/Stones/NormalStone.js";
 import { stoneConfig } from "./level1Config.js";
 import GAME_DATA from "../../../CoreSystem/MainGameHandler.js";
-import SceneLoader from "../../../CoreSystem/SceneLoader.js";
 
 export default class Level1Scene extends Phaser.Scene {
     constructor(mainSceneRef) {
@@ -32,19 +31,21 @@ export default class Level1Scene extends Phaser.Scene {
     };
 
     create() {
-        this.map1 = new Map1(this);
-        this.map1.create();
+        this.map = new Map1(this);
+        this.map.create();
 
         //ADD PLAYER----------------------------->
         this.player = new Player(this);
-        this.player.create(this.map1.xCenter, this.map1.yCenter + 500);
+        this.player.create(this.map.xCenter, this.map.yCenter + 500);
+        this.player.PlayerLifes = GAME_DATA.PLAYER_STATES.DEFAULT_PLAYER_LIFES;
+        this.player.addMapRef(this.map);
         this.addPlayerWorldCollider();
         
         //ADD START BALL------------------------->
         this.normalBall = new NormalBallObj(this);
         this.normalBall.create();
         this.player.addBallRef(this.normalBall);
-        this.normalBall.addPlayerRef(this.player, this.map1);
+        this.normalBall.addPlayerRef(this.player, this.map);
         this.normalBall.addNormalBallCollider();
 
         this.UI = new UserInterface(this);
@@ -62,8 +63,8 @@ export default class Level1Scene extends Phaser.Scene {
     };
 
     addPlayerWorldCollider() {
-        this.physics.add.collider(this.player.playerPaddle, this.map1.leftBoder);
-        this.physics.add.collider(this.player.playerPaddle, this.map1.rightBorder);
+        this.physics.add.collider(this.player.playerPaddle, this.map.leftBoder);
+        this.physics.add.collider(this.player.playerPaddle, this.map.rightBorder);
     };
 
     loadNextScene() {
@@ -72,7 +73,7 @@ export default class Level1Scene extends Phaser.Scene {
 
     update(time, delta) {
         if (!this.stopLoop) {
-            this.map1.update();
+            this.map.update();
             this.player.update();
             this.normalBall.update(time, delta);
             this.UI.update();
@@ -91,10 +92,10 @@ export default class Level1Scene extends Phaser.Scene {
                     this.UI.showScoreBord();
                 });
             };
-        }
+        };
     };
     updatePools() {
         this.NormalStonePool = this.NormalStonePool.filter((ball) => ball.isDestroyed != true);
         this.RedStonePool = this.RedStonePool.filter((ball) => ball.isDestroyed != true);
-    }
+    };
 };

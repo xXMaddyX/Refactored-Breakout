@@ -16,6 +16,7 @@ export default class SceneLoader{
         this.scene.scene.launch("TitelScene");
         GAME_DATA.CURRENT_GAME_STATES.CURRENT_SCENE = "TitelScene";
         if (oldScene) {
+            this.scene.sound.removeAll();
             this.scene.scene.remove(oldScene);
         }
     };

@@ -13,19 +13,23 @@ export default class NormalBallColliders {
         ball.scene.physics.add.overlap(ball.normalBall, ball.mapRef.rightBorder, () => {
             ball.currentMoveDirectionX = ball.BALL_MOVE_X.LEFT;
             ball.playSound("ball-hit-wall");
-        })
+        });
         
         ball.scene.physics.add.overlap(ball.playerRef.playerPaddle, ball.normalBall, () => {
+            ball.changeSpeedRandom();
             ball.currentMoveDirectionY = ball.BALL_MOVE_Y.UP;
+            if (!ball.currentMoveDirectionX) {
+                ball.currentMoveDirectionX = Phaser.Math.RND.pick([ball.BALL_MOVE_X.LEFT, ball.BALL_MOVE_X.RIGHT]);
+            };
             ball.playerRef.glowTrigger();
             ball.playSound("ball-hit-stone");
             ball.scene.time.delayedCall(100, () => {
                 ball.playerRef.glowTrigger()
-            })
+            });
         });
         ball.scene.physics.add.overlap(ball.normalBall, ball.mapRef.topBorder, () => {
             ball.currentMoveDirectionY = ball.BALL_MOVE_Y.DOWN;
             ball.playSound("ball-hit-wall");
-        })
-    }
-}
+        });
+    };
+};

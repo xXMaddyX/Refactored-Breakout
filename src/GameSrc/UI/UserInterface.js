@@ -33,7 +33,11 @@ export default class UserInterface {
         
         this.currentScore = this.scene.add.text(10, 40, `Score: ${GAME_DATA.GAME_SCORE_SYSTEM.DEFAULT_SCORE}`).setDepth(-1);
         this.currentScore.scale = 2;
-        this.currentScore.setStroke("#000000", 6)
+        this.currentScore.setStroke("#000000", 6);
+
+        this.currentPlayerLifes = this.scene.add.text(1700, 10, `Paddels: ${GAME_DATA.PLAYER_STATES.PLAYER_LIFES}`).setDepth(-1);
+        this.currentPlayerLifes.scale = 2;
+        this.currentPlayerLifes.setStroke("#000000", 6);
         //----------------------------------------------------------------------------------------------------->
         //SKILL_BUTTON----------------------------------------------------------------------------------------->
         this.Ai_Button = this.scene.add.text().setInteractive();
@@ -102,6 +106,7 @@ export default class UserInterface {
     updateScore() {
         this.highScore.text = `Your Highes Score: ${GAME_DATA.GAME_SCORE_SYSTEM.YOUR_HIGHEST_SCORE}`;
         this.currentScore.text = `Score ${GAME_DATA.GAME_SCORE_SYSTEM.CURRENT_SCORE}`;
+        this.currentPlayerLifes.text = `Paddels: ${GAME_DATA.PLAYER_STATES.PLAYER_LIFES}`;
     };
     //---------------------------------------------------------------------------------------------->
     //-----------------------------------CRUSHED_IF_HANDLERS---------------------------------------->

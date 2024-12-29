@@ -37,7 +37,7 @@ export default class NormalBallMoveHandler {
         } else if (ball.currentMoveDirectionY === ball.BALL_MOVE_Y.UP) {
             ball.normalBall.setVelocityY(ball.BALL_MOVE_Y.DOWN * ball.SPEED);
             ball.currentMoveDirectionY = ball.BALL_MOVE_Y.DOWN;
-        }
+        };
         
         const newDirection = Phaser.Math.RND.pick([ball.BALL_MOVE_X.LEFT, ball.BALL_MOVE_X.RIGHT]);
         ball.normalBall.setVelocityX(newDirection * ball.SPEED);
@@ -60,5 +60,5 @@ export default class NormalBallMoveHandler {
         
         let newHorizontalSpeedUP = Phaser.Math.RND.pick([-1.5, -2, -1.1, -1.0]);
         ball.BALL_MOVE_Y.UP = newHorizontalSpeedUP;        
-    }
-}
+    };
+};
