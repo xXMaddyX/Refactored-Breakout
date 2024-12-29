@@ -12,6 +12,12 @@ import RedStoneSprite from "../Assets/SpriteAssets/Stones/RedStone.png";
 import SolidRedStoneSprite from "../Assets/SpriteAssets/Stones/SolidStoneRed.png";
 import NormalStoneHitAudio from "../Assets/AudioAssets/BallAudios/hitNormalStone.wav";
 
+//UI IMPORTS
+import UI_Crushed_it from "../Assets/SpriteAssets/UI/Crushed_it.png";
+
+//Main Scene Imports
+import PauseSprite from "../Assets/MainSceneAssets/Pause.png";
+
 //Titel Sceen Imports
 import TitelBackgroundSprite from "../Assets/SpriteAssets/TitelScreenAssets/TitelBackground.png";
 import TitelOptionSprite from "../Assets/SpriteAssets/TitelScreenAssets/Option.png";
@@ -29,6 +35,9 @@ export {
     NormalBall,
     BallHitWall,
     BallHitStone,
+
+    UI_Crushed_it,
+    PauseSprite,
 
     NormalStoneSprite,
     RedStoneSprite,

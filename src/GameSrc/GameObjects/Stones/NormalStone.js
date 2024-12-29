@@ -1,5 +1,6 @@
 import Phaser from "phaser";
 import NormalBallObj from "../Balls/NormalBall/NormalBall";
+import GAME_DATA from "../../CoreSystem/MainGameHandler";
 import { NormalStoneSprite, NormalStoneHitAudio } from "../../CoreSystem/AssetLoader";
 
 export default class NormalStone {
@@ -9,7 +10,7 @@ export default class NormalStone {
         this.HP = 1;
         this.isDestroyed = false;
         this.iscollidet = false;
-
+        this.score = 50;
         this.colliderPool = [];
 
     };
@@ -46,6 +47,7 @@ export default class NormalStone {
                 this.hitAudio.play();
                 this.ballRef.invertBallVelocityDirection();
                 this.ballRef.changeSpeedRandom();
+                GAME_DATA.GAME_SCORE_SYSTEM.CURRENT_SCORE += this.score;
                 this.takeDamage();
                 this.checkDead();
                 this.scene.time.delayedCall(100, () => {

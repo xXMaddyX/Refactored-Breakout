@@ -1,5 +1,6 @@
 import Phaser from "phaser";
 import NormalBallObj from "../Balls/NormalBall/NormalBall";
+import GAME_DATA from "../../CoreSystem/MainGameHandler";
 import { RedStoneSprite, NormalStoneHitAudio } from "../../CoreSystem/AssetLoader";
 
 export default class RedStone {
@@ -9,7 +10,7 @@ export default class RedStone {
         this.HP = 1;
         this.isDestroyed = false;
         this.iscollidet = false;
-
+        this.score = 100;
         this.colliderPool = [];
 
     };
@@ -43,6 +44,7 @@ export default class RedStone {
             if (!this.iscollidet) {
                 this.iscollidet = true;
                 this.hitAudio.play();
+                GAME_DATA.GAME_SCORE_SYSTEM.CURRENT_SCORE += this.score;
                 this.ballRef.invertBallVelocityDirection();
                 this.ballRef.changeSpeedRandom();
                 this.takeDamage();

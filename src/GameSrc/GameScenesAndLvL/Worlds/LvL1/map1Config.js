@@ -11,7 +11,7 @@ const KEYS = {
 
 const World1Config = {
     backgroundPositions: [
-        {x: calcBackPositionX(0), y: calcBackPositionY(0), key: KEYS.KEY_BACKGROUND, alpha: 1, depth: 0, scale: 1}
+        {x: calcBackPositionX(0), y: calcBackPositionY(0), key: KEYS.KEY_BACKGROUND, alpha: 1, depth: -10, scale: 1}
     ],
 }
 

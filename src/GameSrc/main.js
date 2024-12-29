@@ -1,5 +1,6 @@
 import Phaser from "phaser";
 import MainScene from "./CoreSystem/MainScene.js";
+import GAME_DATA from "./CoreSystem/MainGameHandler.js";
 
 export default new Phaser.Game({
     type: Phaser.WEBGL,

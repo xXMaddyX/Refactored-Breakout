@@ -6,7 +6,6 @@ export default class SolidRedStone {
         /**@type {Phaser.Scene} */
         this.scene = scene;
         this.iscollidet = false;
-
         this.colliderPool = [];
     };
 

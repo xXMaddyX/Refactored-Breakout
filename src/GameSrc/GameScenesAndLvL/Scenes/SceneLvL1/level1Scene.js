@@ -1,4 +1,5 @@
 import Phaser from "phaser";
+import MainScene from "../../../CoreSystem/MainScene.js";
 import Map1 from "../../Worlds/LvL1/map1.js";
 import Player from "../../../GameObjects/Player/Player.js";
 import UserInterface from "../../../UI/UserInterface.js";
@@ -7,10 +8,13 @@ import RedStone from "../../../GameObjects/Stones/RedStones.js";
 import StoneGenerator from "../../../CoreSystem/StoneGenerator.js";
 import NormalStone from "../../../GameObjects/Stones/NormalStone.js";
 import { stoneConfig } from "./level1Config.js";
+import GAME_DATA from "../../../CoreSystem/MainGameHandler.js";
 
 export default class Level1Scene extends Phaser.Scene {
-    constructor() {
+    constructor(mainSceneRef) {
         super();
+        /**@type {MainScene} */
+        this.mainScene = mainSceneRef;
 
         this.NormalStonePool = [];
         this.RedStonePool = [];
@@ -22,6 +26,7 @@ export default class Level1Scene extends Phaser.Scene {
         NormalBallObj.loadSprites(this);
         NormalStone.loadSprites(this);
         RedStone.loadSprites(this);
+        UserInterface.loadSprites(this);
     };
 
     create() {
@@ -44,13 +49,15 @@ export default class Level1Scene extends Phaser.Scene {
         this.UI.create();
         this.UI.setPlayerPaddelRef(this.player);
 
+        /**@type {MainScene} */
+        GAME_DATA.SCENE_REFS.MAIN_SCENE_REF.setUIRef(this.UI);
+
         this.stoneGenerator = new StoneGenerator(this);
         this.stoneGenerator.setBallRef(this.normalBall);
         this.NormalStonePool = this.stoneGenerator.generateStoneMap(stoneConfig.normal_stones, "normal-stone");
 
         this.RedStonePool = this.stoneGenerator.generateStoneMap(stoneConfig.red_stones, "red-stone");
     };
-
 
     addPlayerWorldCollider() {
         this.physics.add.collider(this.player.playerPaddle, this.map1.leftBoder);
@@ -62,6 +69,7 @@ export default class Level1Scene extends Phaser.Scene {
         this.map1.update();
         this.player.update();
         this.normalBall.update(time, delta);
+        this.UI.update();
         
         this.NormalStonePool.forEach(stone => {
             stone.update();
