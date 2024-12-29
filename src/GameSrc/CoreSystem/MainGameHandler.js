@@ -1,10 +1,8 @@
-import MainScene from "./MainScene";
-
 const GAME_DATA = {
     GAME_SCORE_SYSTEM: {
         DEFAULT_SCORE: 0,
         CURRENT_SCORE: 0,
-        HIGH_SCORE: 0,
+        YOUR_HIGHEST_SCORE: 0,
     },
 
     UNLOCK_LEVEL: {
@@ -20,6 +18,7 @@ const GAME_DATA = {
 
     SCENE_REFS: {
         MAIN_SCENE_REF: null,
+        SCENE_LOADER_REF: null,
     }
 }
 

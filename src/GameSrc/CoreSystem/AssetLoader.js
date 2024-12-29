@@ -14,6 +14,7 @@ import NormalStoneHitAudio from "../Assets/AudioAssets/BallAudios/hitNormalStone
 
 //UI IMPORTS
 import UI_Crushed_it from "../Assets/SpriteAssets/UI/Crushed_it.png";
+import ScoreBordSprite from "../Assets/SpriteAssets/UI/Highscore.png";
 
 //Main Scene Imports
 import PauseSprite from "../Assets/MainSceneAssets/Pause.png";
@@ -37,6 +38,7 @@ export {
     BallHitStone,
 
     UI_Crushed_it,
+    ScoreBordSprite,
     PauseSprite,
 
     NormalStoneSprite,

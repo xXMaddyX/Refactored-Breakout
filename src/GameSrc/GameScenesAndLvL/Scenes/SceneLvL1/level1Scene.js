@@ -9,12 +9,14 @@ import StoneGenerator from "../../../CoreSystem/StoneGenerator.js";
 import NormalStone from "../../../GameObjects/Stones/NormalStone.js";
 import { stoneConfig } from "./level1Config.js";
 import GAME_DATA from "../../../CoreSystem/MainGameHandler.js";
+import SceneLoader from "../../../CoreSystem/SceneLoader.js";
 
 export default class Level1Scene extends Phaser.Scene {
     constructor(mainSceneRef) {
         super();
         /**@type {MainScene} */
         this.mainScene = mainSceneRef;
+        this.stopLoop = false;
 
         this.NormalStonePool = [];
         this.RedStonePool = [];
@@ -64,22 +66,32 @@ export default class Level1Scene extends Phaser.Scene {
         this.physics.add.collider(this.player.playerPaddle, this.map1.rightBorder);
     };
 
-    
+    loadNextScene() {
+        GAME_DATA.SCENE_REFS.SCENE_LOADER_REF.loadLevel2(GAME_DATA.CURRENT_GAME_STATES.CURRENT_SCENE);
+    };
+
     update(time, delta) {
-        this.map1.update();
-        this.player.update();
-        this.normalBall.update(time, delta);
-        this.UI.update();
-        
-        this.NormalStonePool.forEach(stone => {
-            stone.update();
-        });
-        this.updatePools();
-        if (this.NormalStonePool == 0 && this.RedStonePool == 0) {
-            //IF MAP GOAL IS REACHED FIRE THE UI EVENT TO STOP CURRENT GAME SCENE!!!!!!!!!!!!!!
-            //NEED TO IMPLEMENT!!!! :-)
-        };
-        
+        if (!this.stopLoop) {
+            this.map1.update();
+            this.player.update();
+            this.normalBall.update(time, delta);
+            this.UI.update();
+            
+            this.NormalStonePool.forEach(stone => {
+                stone.update();
+            });
+            this.updatePools();
+            if (this.NormalStonePool == 0 && this.RedStonePool == 0) {
+                this.stopLoop = true;
+                this.player.playerPaddle.setVelocity(0);
+                this.normalBall.normalBall.setVelocity(0);
+                this.UI.showCrushedIt();
+                this.time.delayedCall(5000, () => {
+                    this.UI.hideCrushedIt();
+                    this.UI.showScoreBord();
+                });
+            };
+        }
     };
     updatePools() {
         this.NormalStonePool = this.NormalStonePool.filter((ball) => ball.isDestroyed != true);

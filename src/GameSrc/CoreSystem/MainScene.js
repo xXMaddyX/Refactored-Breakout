@@ -12,6 +12,7 @@ export default class MainScene extends Phaser.Scene {
 
     init() {
         this.sceneLoader = new SceneLoader(this);
+        GAME_DATA.SCENE_REFS.SCENE_LOADER_REF = this.sceneLoader;
     };
 
     preload() {
@@ -32,6 +33,8 @@ export default class MainScene extends Phaser.Scene {
         this.init();
         this.initOnStartup();
         GAME_DATA.SCENE_REFS.MAIN_SCENE_REF = this;
+
+        this.LoadingText = this.add.text(960 -250, 540, "Loading----->>>>").setFontSize(50)
 
         this.gamePauseButton = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ESC);
     };
