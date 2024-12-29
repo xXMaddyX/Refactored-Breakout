@@ -25,6 +25,12 @@ const GAME_DATA = {
         MAIN_SCENE_REF: null,
         SCENE_LOADER_REF: null,
     },
+
+    CURRENT_SCENE_DATA_REFS: {
+        IMAGE_DATA: [],
+        ANIMATION_DATA: [],
+        SOUND_DATA: []
+    }
 };
 
 export default GAME_DATA;

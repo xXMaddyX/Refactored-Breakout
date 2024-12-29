@@ -53,7 +53,7 @@ export default class Player  {
     };
 
     animations() {
-        this.paddelBreakAnim = this.scene.anims.create({
+        if (!this.scene.anims.exists("paddel-break")) this.paddelBreakAnim = this.scene.anims.create({
             key: "paddel-break",
             frames: this.scene.anims.generateFrameNumbers("paddel-break", {
                 start: 0,
