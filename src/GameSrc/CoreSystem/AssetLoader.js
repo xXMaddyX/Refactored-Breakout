@@ -12,6 +12,7 @@ import NormalStoneSprite from "../Assets/SpriteAssets/Stones/StoneGreen.png";
 import RedStoneSprite from "../Assets/SpriteAssets/Stones/RedStone.png";
 import SolidRedStoneSprite from "../Assets/SpriteAssets/Stones/SolidStoneRed.png";
 import NormalStoneHitAudio from "../Assets/AudioAssets/BallAudios/hitNormalStone.wav";
+import SolidStoneHitAudio from "../Assets/AudioAssets/BallAudios/HitSolidStone.wav";
 
 //UI IMPORTS
 import UI_Crushed_it from "../Assets/SpriteAssets/UI/Crushed_it.png";
@@ -31,6 +32,10 @@ import TitelQuitSprite from "../Assets/SpriteAssets/TitelScreenAssets/Quit.png";
 import BackgroundLvL1 from "../Assets/SpriteAssets/Backgrounds/scene-Sheet.png";
 import LvL1Music from "../Assets/AudioAssets/LvLAudios/PiepsBreakout.wav";
 
+//Level2 Imports
+import LvL2Music from "../Assets/AudioAssets/LvLAudios/MusicLvL2.wav";
+import BackgroundLvL2 from "../Assets/SpriteAssets/Backgrounds/Level2Background/BackgroundLvL2.png";
+
 
 export {
     PlayerNormalPaddel,
@@ -39,6 +44,7 @@ export {
     NormalBall,
     BallHitWall,
     BallHitStone,
+    SolidStoneHitAudio,
 
     UI_Crushed_it,
     ScoreBordSprite,
@@ -56,5 +62,7 @@ export {
     TitelStartSprite,
 
     BackgroundLvL1,
-    LvL1Music
-}
+    BackgroundLvL2,
+    LvL1Music,
+    LvL2Music
+};

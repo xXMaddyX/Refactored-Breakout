@@ -52,8 +52,8 @@ export default class Player  {
         this.aiPlayerIsActive = bool;
     };
 
-    animations() {
-        if (!this.scene.anims.exists("paddel-break")) this.paddelBreakAnim = this.scene.anims.create({
+    initAnimations() {
+        this.paddelBreakAnim = this.scene.anims.create({
             key: "paddel-break",
             frames: this.scene.anims.generateFrameNumbers("paddel-break", {
                 start: 0,
@@ -71,7 +71,7 @@ export default class Player  {
         this.glow.active = false;
         this.playerPaddle.scale = this.playerPaddle.scale / 3;
 
-        this.animations();
+        this.initAnimations();
 
         this.leftKey = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
         this.rightKey = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);

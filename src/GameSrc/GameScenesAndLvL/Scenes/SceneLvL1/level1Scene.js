@@ -1,13 +1,13 @@
 import Phaser from "phaser";
-import MainScene from "../../../CoreSystem/MainScene.js";
 import Map1 from "../../Worlds/LvL1/map1.js";
+import { stoneConfig } from "./level1Config.js";
+import MainScene from "../../../CoreSystem/MainScene.js";
 import Player from "../../../GameObjects/Player/Player.js";
 import UserInterface from "../../../UI/UserInterface.js";
 import NormalBallObj from "../../../GameObjects/Balls/NormalBall/NormalBall.js";
 import RedStone from "../../../GameObjects/Stones/RedStones.js";
 import StoneGenerator from "../../../CoreSystem/StoneGenerator.js";
 import NormalStone from "../../../GameObjects/Stones/NormalStone.js";
-import { stoneConfig } from "./level1Config.js";
 import GAME_DATA from "../../../CoreSystem/MainGameHandler.js";
 
 export default class Level1Scene extends Phaser.Scene {
@@ -73,10 +73,10 @@ export default class Level1Scene extends Phaser.Scene {
 
     update(time, delta) {
         if (!this.stopLoop) {
-            this.map.update();
-            this.player.update();
+            this.map.update(time, delta);
+            this.player.update(time, delta);
             this.normalBall.update(time, delta);
-            this.UI.update();
+            this.UI.update(time, delta);
             
             this.NormalStonePool.forEach(stone => {
                 stone.update();

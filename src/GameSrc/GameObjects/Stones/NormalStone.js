@@ -17,7 +17,7 @@ export default class NormalStone {
     static loadSprites(sceneIn) {
         /**@type {Phaser.Scene} */
         let scene = sceneIn;
-        this.spriteRef = scene.load.image("normal-stone", NormalStoneSprite);
+        if (!scene.textures.exists("normal-stone")) scene.load.image("normal-stone", NormalStoneSprite);
         scene.load.audio("normal-stone-audio", NormalStoneHitAudio);
     };
 

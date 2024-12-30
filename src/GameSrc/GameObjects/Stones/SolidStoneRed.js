@@ -1,23 +1,41 @@
 import Phaser from "phaser";
-import { SolidRedStoneSprite } from "../../CoreSystem/AssetLoader";
+import NormalBallObj from "../Balls/NormalBall/NormalBall";
+import { SolidRedStoneSprite, SolidStoneHitAudio } from "../../CoreSystem/AssetLoader";
 
 export default class SolidRedStone {
     constructor(scene) {
         /**@type {Phaser.Scene} */
         this.scene = scene;
+        this.HP = 1;
+        this.isDestroyed = false;
         this.iscollidet = false;
         this.colliderPool = [];
     };
 
     static loadSprites(scene) {
-        /**@type {Phaser.Scene} */
-        this.sceneRef = scene;
-        if (!this.sceneRef.textures.exists("solid-stone-red")) this.sceneRef.load.image("solid-stone-red", SolidRedStoneSprite);
+        if (!scene.textures.exists("solid-stone-red")) scene.load.image("solid-stone-red", SolidRedStoneSprite);
+        scene.load.audio("solid-stone-hit", SolidStoneHitAudio);
     };
 
     setBallRef(ballRef) {
         /**@type {NormalBallObj} */
         this.ballRef = ballRef;
+    };
+
+    takeDamage() {
+        this.HP -= 1;
+    };
+
+    checkDead() {
+        if (this.HP <= 0) {
+            this.colliderPool.forEach(element => {
+                element.destroy();
+            });
+            this.solidStone.destroy();
+            this.isDestroyed = true;
+        } else {
+            return;
+        }
     };
 
     addOverlapBall() {
@@ -26,6 +44,13 @@ export default class SolidRedStone {
                 this.iscollidet = true;
                 this.ballRef.invertBallVelocityDirection();
                 this.ballRef.changeSpeedRandom();
+                this.audio.play();
+
+                if (this.ballRef.BALL_IS_BOMB_STATE) {
+                    this.takeDamage();
+                    this.checkDead();
+                };
+
                 this.scene.time.delayedCall(100, () => {
                     this.iscollidet = false;
                 });
@@ -35,10 +60,13 @@ export default class SolidRedStone {
     };
 
     create(x, y, scale, depth) {
-        this.solidStone = this.scene.physics.add.sprite(x, y);
+        this.solidStone = this.scene.physics.add.sprite(x, y, "solid-stone-red");
         this.solidStone.setDepth(depth);
         this.solidStone.setScale(scale);
-        this.redStone.postFX.addShadow(-1, 1, 0.015);
+        this.solidStone.postFX.addShadow(-1, 1, 0.015);
+
+        this.audio = this.scene.sound.add("solid-stone-hit");
+        this.audio.volume = 0.8;
     };
 
     update(time, delta) {
