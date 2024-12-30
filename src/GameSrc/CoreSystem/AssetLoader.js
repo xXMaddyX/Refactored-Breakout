@@ -4,6 +4,7 @@ import PlayerPaddelSheet from "../Assets/SpriteAssets/playerAssets/PaddelBreak.p
 
 //Ball Sprite Imports
 import NormalBall from "../Assets/SpriteAssets/playerAssets/NormalBall.png";
+import BombBall from "../Assets/SpriteAssets/playerAssets/BombBallSheet.png";
 import BallHitWall from "../Assets/AudioAssets/BallAudios/BallHitWall.wav";
 import BallHitStone from "../Assets/AudioAssets/BallAudios/BallHitStone.wav";
 
@@ -11,6 +12,8 @@ import BallHitStone from "../Assets/AudioAssets/BallAudios/BallHitStone.wav";
 import NormalStoneSprite from "../Assets/SpriteAssets/Stones/StoneGreen.png";
 import RedStoneSprite from "../Assets/SpriteAssets/Stones/RedStone.png";
 import SolidRedStoneSprite from "../Assets/SpriteAssets/Stones/SolidStoneRed.png";
+import NormalStoneAISprite from "../Assets/SpriteAssets/Stones/StoneGreenAI.png";
+import StoneRedBombSprite from "../Assets/SpriteAssets/Stones/StoneRedBomb.png";
 import NormalStoneHitAudio from "../Assets/AudioAssets/BallAudios/hitNormalStone.wav";
 import SolidStoneHitAudio from "../Assets/AudioAssets/BallAudios/HitSolidStone.wav";
 
@@ -45,6 +48,7 @@ export {
 
     //BALL EXPORTS
     NormalBall,
+    BombBall,
     BallHitWall,
     BallHitStone,
     
@@ -59,6 +63,8 @@ export {
     NormalStoneSprite,
     RedStoneSprite,
     SolidRedStoneSprite,
+    NormalStoneAISprite,
+    StoneRedBombSprite,
     NormalStoneHitAudio,
     SolidStoneHitAudio,
 

@@ -22,7 +22,6 @@ export default class MainScene extends Phaser.Scene {
         });
     };
 
-
     initOnStartup() {
         this.sceneLoader.loadTitelScene();
     };

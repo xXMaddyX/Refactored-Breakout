@@ -17,9 +17,7 @@ export default class NormalBallObj {
         this.DEFAULT_SPEED = 500;
         this.SPEED = this.DEFAULT_SPEED;
         this.BALL_IS_FIRED = false;
-        //NEED TO IMPLEMENT BALL BOMB STATE!!!!!!!!!!!!!!!!!!!
-        //LOGIC FOR SOLID STONE IS ALLREADY IMPLEMENTET!!!!!!!
-        this.BALL_IS_BOMB_STATE = true;
+        this.BALL_IS_BOMB_STATE = false;
 
         this.BALL_MOVE_X = {
             DEFAULT_LEFT: -1,
@@ -65,6 +63,11 @@ export default class NormalBallObj {
         this.playerRef = playerRef;
         this.mapRef = mapRef;
     };
+
+    setBallToBombState() {
+        this.BALL_IS_BOMB_STATE = true;
+        //ADD CHANGE TO BALL AS BOMB ANIMATION!!!!!!!!!!!!!!!!!!!!!!
+    }
     
     addNormalBallCollider() {
         NormalBallColliders.addCollider(this);

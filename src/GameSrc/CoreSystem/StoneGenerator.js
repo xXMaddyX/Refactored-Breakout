@@ -3,6 +3,7 @@ import NormalBallObj from "../GameObjects/Balls/NormalBall/NormalBall.js";
 import NormalStone from "../GameObjects/Stones/NormalStone.js";
 import RedStone from "../GameObjects/Stones/RedStones.js";
 import SolidRedStone from "../GameObjects/Stones/SolidStoneRed.js";
+import NormalBombStone from "../GameObjects/Stones/NormalStoneBomb.js";
 
 export default class StoneGenerator {
     constructor(scene) {
@@ -54,7 +55,18 @@ export default class StoneGenerator {
                     newStone.setBallRef(this.ball);
                     newStone.create(x, y, scale, depth);
                     newStone.addOverlapBall();
-                    stoneArr.push(newStone)
+                    stoneArr.push(newStone);
+                });
+                break;
+
+            case "normal-stone-bomb":
+                map.forEach(({x, y, scale, depth}) => {
+                    /**@type {NormalBombStone} */
+                    let newStone = new NormalBombStone(this.scene);
+                    newStone.setBallRef(this.ball);
+                    newStone.create(x, y, scale, depth);
+                    newStone.addOverlapBall();
+                    stoneArr.push(newStone);
                 });
                 break;
         }

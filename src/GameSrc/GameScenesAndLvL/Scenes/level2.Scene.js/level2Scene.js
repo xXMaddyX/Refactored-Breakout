@@ -10,6 +10,7 @@ import SolidRedStone from "../../../GameObjects/Stones/SolidStoneRed.js";
 import StoneGenerator from "../../../CoreSystem/StoneGenerator.js";
 import NormalStone from "../../../GameObjects/Stones/NormalStone.js";
 import GAME_DATA from "../../../CoreSystem/MainGameHandler.js";
+import NormalBombStone from "../../../GameObjects/Stones/NormalStoneBomb.js";
 
 export default class Level2Scene extends Phaser.Scene {
     constructor(mainSceneRef) {
@@ -21,6 +22,7 @@ export default class Level2Scene extends Phaser.Scene {
         this.NormalStonePool = [];
         this.RedStonePool = [];
         this.SolidRedStonePool = [];
+        this.NormalStoneBombPool = [];
     }
 
     preload() {
@@ -30,6 +32,7 @@ export default class Level2Scene extends Phaser.Scene {
         NormalStone.loadSprites(this);
         RedStone.loadSprites(this);
         SolidRedStone.loadSprites(this);
+        NormalBombStone.loadSprites(this);
         UserInterface.loadSprites(this);
     };
 
@@ -69,6 +72,7 @@ export default class Level2Scene extends Phaser.Scene {
         this.NormalStonePool = this.stoneGenerator.generateStoneMap(StoneConfigLvL2.NormalStones, "normal-stone");
         this.RedStonePool = this.stoneGenerator.generateStoneMap(StoneConfigLvL2.RedStones, "red-stone");
         this.SolidRedStonePool = this.stoneGenerator.generateStoneMap(StoneConfigLvL2.SolidStones, "solid-stone-red");
+        this.NormalStoneBombPool = this.stoneGenerator.generateStoneMap(StoneConfigLvL2.NormalStonesBomb, "normal-stone-bomb");
     };
 
     addPlayerWorldCollider() {
@@ -82,7 +86,7 @@ export default class Level2Scene extends Phaser.Scene {
         this.normalBall.update(time, delta);
         this.UI.update(time, delta);
         this.updatePools();
-        if (this.NormalStonePool == 0 && this.RedStonePool == 0 && this.SolidRedStonePool == 0) {
+        if (this.NormalStonePool == 0 && this.RedStonePool == 0 && this.SolidRedStonePool == 0 && this.NormalStoneBombPool == 0) {
             this.stopLoop = true;
             this.player.playerPaddle.setVelocity(0);
             this.normalBall.normalBall.setVelocity(0);
@@ -98,5 +102,6 @@ export default class Level2Scene extends Phaser.Scene {
         this.NormalStonePool = this.NormalStonePool.filter((ball) => ball.isDestroyed != true);
         this.RedStonePool = this.RedStonePool.filter((ball) => ball.isDestroyed != true);
         this.SolidRedStonePool = this.SolidRedStonePool.filter((ball) => ball.isDestroyed != true);
+        this.NormalStoneBombPool = this.NormalStoneBombPool.filter((ball) => ball.isDestroyed != true);
     };
 };

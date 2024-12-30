@@ -32,7 +32,6 @@ const StoneConfigLvL2 = {
 
         {x: 150, y: 250, scale: 0.2, depth: 0},
         {x: 350, y: 250, scale: 0.2, depth: 0},
-        {x: 950, y: 250, scale: 0.2, depth: 0},
         {x: 1550, y: 250, scale: 0.2, depth: 0},
         {x: 1750, y: 250, scale: 0.2, depth: 0},
 
@@ -60,7 +59,10 @@ const StoneConfigLvL2 = {
 
         {x: 250, y: 400, scale: 0.2, depth: 0},
         {x: 1650, y: 400, scale: 0.2, depth: 0},
-    ]
+    ],
+    NormalStonesBomb: [
+        {x: 950, y: 250, scale: 0.2, depth: 0},
+    ],
 };
 
 export default StoneConfigLvL2;
