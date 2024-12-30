@@ -17,6 +17,7 @@ import SolidStoneHitAudio from "../Assets/AudioAssets/BallAudios/HitSolidStone.w
 //UI IMPORTS
 import UI_Crushed_it from "../Assets/SpriteAssets/UI/Crushed_it.png";
 import ScoreBordSprite from "../Assets/SpriteAssets/UI/Highscore.png";
+import NextLvLButton from "../Assets/SpriteAssets/UI/NextLevel.png";
 
 //Main Scene Imports
 import LoadingAnimationSprite from "../Assets/MainSceneAssets/LoadingAnimation.png";
@@ -38,29 +39,36 @@ import BackgroundLvL2 from "../Assets/SpriteAssets/Backgrounds/Level2Background/
 
 
 export {
+    //PLAYER EXPORTS
     PlayerNormalPaddel,
     PlayerPaddelSheet,
 
+    //BALL EXPORTS
     NormalBall,
     BallHitWall,
     BallHitStone,
-    SolidStoneHitAudio,
-
+    
+    //UI EXPORTS
     UI_Crushed_it,
     ScoreBordSprite,
     PauseSprite,
     LoadingAnimationSprite,
-
+    NextLvLButton,
+    
+    //STONE EXPORTS
     NormalStoneSprite,
     RedStoneSprite,
     SolidRedStoneSprite,
     NormalStoneHitAudio,
+    SolidStoneHitAudio,
 
+    //TITEL_SCREEN_EXPORTS
     TitelBackgroundSprite,
     TitelOptionSprite,
     TitelQuitSprite,
     TitelStartSprite,
 
+    //LEVEL_EXPORTS
     BackgroundLvL1,
     BackgroundLvL2,
     LvL1Music,

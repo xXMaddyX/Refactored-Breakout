@@ -33,6 +33,12 @@ export default class Level2Scene extends Phaser.Scene {
         UserInterface.loadSprites(this);
     };
 
+    loadNextLevel() {
+        this.map.isAudioStoped = true;
+        this.map.audio.stop();
+        //ADD LOAD LEVEL3!!!!!!!!!!!!!!!
+    };
+
     create() {
         this.map = new Map2(this);
         this.map.create();

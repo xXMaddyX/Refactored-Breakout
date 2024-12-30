@@ -1,7 +1,7 @@
 import Phaser from "phaser";
 import Player from "../GameObjects/Player/Player.js";
 import GAME_DATA from "../CoreSystem/MainGameHandler.js";
-import { UI_Crushed_it, PauseSprite, ScoreBordSprite } from "../CoreSystem/AssetLoader.js";
+import { UI_Crushed_it, PauseSprite, ScoreBordSprite, NextLvLButton } from "../CoreSystem/AssetLoader.js";
 
 export default class UserInterface {
     constructor(scene) {
@@ -15,6 +15,7 @@ export default class UserInterface {
         if (!scene.textures.exists("crushed-it")) scene.load.image("crushed-it", UI_Crushed_it);
         if (!scene.textures.exists("pause")) scene.load.image("pause", PauseSprite);
         if (!scene.textures.exists("score-bord")) scene.load.image("score-bord", ScoreBordSprite);
+        if (!scene.textures.exists("next-button")) scene.load.image("next-button", NextLvLButton);
     };
     //--------------------------------------------------------------------------------------------------------->
     //-----------------------------------------CREATE_UI_ELEMENTS---------------------------------------------->
@@ -76,12 +77,18 @@ export default class UserInterface {
         this.scoreBordYourScore.setFontSize(45);
         this.scoreBordYourScore.setStroke("#000000", 6);
 
+        this.nextButton = this.scene.add.sprite(200, 240, "next-button").setInteractive().setScale(.5);
+        this.nextButton.on("pointerdown", () => {
+            this.scene.loadNextLevel();
+        });
+
         let spriteList = [
             this.scoreBord,
             this.scoreBordHighScoreHead,
             this.scoreBordHighScore,
             this.scoreBordYourScoreHead,
             this.scoreBordYourScore,
+            this.nextButton,
         ];
         this.scoreContainer.add(spriteList);
 
