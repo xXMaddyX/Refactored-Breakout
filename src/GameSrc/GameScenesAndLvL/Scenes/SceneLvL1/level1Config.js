@@ -33,7 +33,6 @@ const stoneConfig = {
         {x: 350, y: 250, scale: 0.2, depth: 0},
         {x: 550, y: 250, scale: 0.2, depth: 0},
         {x: 750, y: 250, scale: 0.2, depth: 0},
-        {x: 950, y: 250, scale: 0.2, depth: 0},
         {x: 1150, y: 250, scale: 0.2, depth: 0},
         {x: 1350, y: 250, scale: 0.2, depth: 0},
         {x: 1550, y: 250, scale: 0.2, depth: 0},
@@ -43,7 +42,6 @@ const stoneConfig = {
         {x: 350, y: 350, scale: 0.2, depth: 0},
         {x: 550, y: 350, scale: 0.2, depth: 0},
         {x: 750, y: 350, scale: 0.2, depth: 0},
-        {x: 950, y: 350, scale: 0.2, depth: 0},
         {x: 1150, y: 350, scale: 0.2, depth: 0},
         {x: 1350, y: 350, scale: 0.2, depth: 0},
         {x: 1550, y: 350, scale: 0.2, depth: 0},
@@ -58,6 +56,10 @@ const stoneConfig = {
         {x: 1350, y: 450, scale: 0.2, depth: 0},
         {x: 1550, y: 450, scale: 0.2, depth: 0},
         {x: 1750, y: 450, scale: 0.2, depth: 0},
+    ],
+    normal_stones_ai: [
+        {x: 950, y: 250, scale: 0.2, depth: 0},
+        {x: 950, y: 350, scale: 0.2, depth: 0},
     ],
 };
 

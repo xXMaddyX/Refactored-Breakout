@@ -85,7 +85,7 @@ export default class Player  {
 
     addMapRef(mapRef) {
         this.mapRef = mapRef;
-    }
+    };
 
     checkCurrentMoveKey() {
         if (this.leftKey.isDown) {
@@ -131,6 +131,17 @@ export default class Player  {
                     this.playerPaddle.setAccelerationX(this.MOVE_STATES.RIGHT * this.SPEED);
                 }
                 break;
+        };
+    };
+
+    /**Connected to Ball and need to called there */
+    setAiPlayerOnTimer() {
+        if (!this.aiPlayerIsActive) {
+            let timeInSec = 1000 * 10 //(mulliSec * Sec );
+            this.aiPlayerIsActive = true;
+            this.scene.time.delayedCall(timeInSec, () => {
+                this.aiPlayerIsActive = false;
+            });
         };
     };
 

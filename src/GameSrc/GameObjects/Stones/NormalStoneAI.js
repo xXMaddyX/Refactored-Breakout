@@ -1,8 +1,8 @@
 import Phaser from "phaser";
 import NormalBallObj from "../Balls/NormalBall/NormalBall";
-import { SolidRedStoneSprite, SolidStoneHitAudio } from "../../CoreSystem/AssetLoader";
+import { NormalStoneAISprite } from "../../CoreSystem/AssetLoader";
 
-export default class SolidRedStone {
+export default class NormalStoneAI {
     constructor(scene) {
         /**@type {Phaser.Scene} */
         this.scene = scene;
@@ -11,15 +11,18 @@ export default class SolidRedStone {
         this.iscollidet = false;
         this.colliderPool = [];
     };
-
+    /**
+     * 
+     * @param {Phaser.Scene} scene 
+     */
     static loadSprites(scene) {
-        if (!scene.textures.exists("solid-stone-red")) scene.load.image("solid-stone-red", SolidRedStoneSprite);
-        scene.load.audio("solid-stone-hit", SolidStoneHitAudio);
+        if (!scene.textures.exists("normal-stone-ai")) scene.load.image("normal-stone-ai", NormalStoneAISprite);
+        //ADD SOUNDS!!!!!!!!!!
     };
 
-    setBallRef(ballRef) {
+    setBallRef(ballRefIn) {
         /**@type {NormalBallObj} */
-        this.ballRef = ballRef;
+        this.ballRef = ballRefIn;
     };
 
     takeDamage() {
@@ -31,26 +34,23 @@ export default class SolidRedStone {
             this.colliderPool.forEach(element => {
                 element.destroy();
             });
-            this.solidStone.destroy();
+            this.normalStoneAi.destroy();
             this.isDestroyed = true;
         } else {
             return;
-        }
+        };
     };
 
     addOverlapBall() {
-        let collider = this.scene.physics.add.overlap(this.ballRef.normalBall, this.solidStone, () => {
+        let collider = this.scene.physics.add.overlap(this.ballRef.normalBall, this.normalStoneAi, () => {
             if (!this.iscollidet) {
                 this.iscollidet = true;
                 this.ballRef.invertBallVelocityDirection();
                 this.ballRef.changeSpeedRandom();
-                //ADD BALL SET PLAYER TO AI
-                this.audio.play();
-                if (this.ballRef.BALL_IS_BOMB_STATE) {
-                    this.takeDamage();
-                    this.checkDead();
-                };
-
+                this.ballRef.setPlayerToAi();
+                this.takeDamage();
+                this.checkDead();
+                //PLAY AUDIO HERE!!!!!!!!!!!
                 this.scene.time.delayedCall(100, () => {
                     this.iscollidet = false;
                 });
@@ -60,16 +60,13 @@ export default class SolidRedStone {
     };
 
     create(x, y, scale, depth) {
-        this.solidStone = this.scene.physics.add.sprite(x, y, "solid-stone-red");
-        this.solidStone.setDepth(depth);
-        this.solidStone.setScale(scale);
-        this.solidStone.postFX.addShadow(-1, 1, 0.015);
+        this.normalStoneAi = this.scene.physics.add.sprite(x, y, "normal-stone-ai");
+        this.normalStoneAi.setScale(scale);
+        this.normalStoneAi.setDepth(depth);
+        this.normalStoneAi.postFX.addShadow(-1, 1, 0.015);
 
-        this.audio = this.scene.sound.add("solid-stone-hit");
-        this.audio.volume = 0.8;
+        //ADD STONE SOUND____
     };
 
-    update(time, delta) {
-
-    };
-}
+    update(time, delta) {};
+};

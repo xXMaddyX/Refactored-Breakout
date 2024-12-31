@@ -12,7 +12,7 @@ import BallHitStone from "../Assets/AudioAssets/BallAudios/BallHitStone.wav";
 import NormalStoneSprite from "../Assets/SpriteAssets/Stones/StoneGreen.png";
 import RedStoneSprite from "../Assets/SpriteAssets/Stones/RedStone.png";
 import SolidRedStoneSprite from "../Assets/SpriteAssets/Stones/SolidStoneRed.png";
-import NormalStoneAISprite from "../Assets/SpriteAssets/Stones/StoneGreenAI.png";
+import NormalStoneAISprite from "../Assets/SpriteAssets/Stones/StoneGreenAi.png";
 import StoneRedBombSprite from "../Assets/SpriteAssets/Stones/StoneRedBomb.png";
 import NormalStoneHitAudio from "../Assets/AudioAssets/BallAudios/hitNormalStone.wav";
 import SolidStoneHitAudio from "../Assets/AudioAssets/BallAudios/HitSolidStone.wav";

@@ -50,7 +50,6 @@ export default class NormalBombStone {
                 this.ballRef.invertBallVelocityDirection();
                 this.ballRef.changeSpeedRandom();
                 this.ballRef.setBallToBombState();
-                this.ballRef.BALL_IS_BOMB_STATE = true;
                 GAME_DATA.GAME_SCORE_SYSTEM.CURRENT_SCORE += this.score;
                 this.takeDamage();
                 this.checkDead();

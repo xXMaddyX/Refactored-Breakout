@@ -2,7 +2,7 @@ import Phaser from "phaser";
 import Player from "../../Player/Player.js";
 import NormalBallMoveHandler from "./NormalBallMoveHandler.js";
 import NormalBallColliders from "./NormalBallColliders.js";
-import { NormalBall, BallHitStone, BallHitWall } from "../../../CoreSystem/AssetLoader.js";
+import { NormalBall, BallHitStone, BallHitWall, BombBall } from "../../../CoreSystem/AssetLoader.js";
 
 const KEYS = {
     NORMAL_BALL: "normal-ball",
@@ -41,18 +41,35 @@ export default class NormalBallObj {
         /**@type {Phaser.Scene} */
         let scene = sceneIn;
         if (!scene.textures.exists(KEYS.NORMAL_BALL)) scene.load.image(KEYS.NORMAL_BALL, NormalBall);
+        if (!scene.textures.exists("ball-bomb")) scene.load.spritesheet("ball-bomb", BombBall, {
+            frameHeight: 343, frameWidth: 351
+        });
         
         scene.load.audio(KEYS.BALL_HIT_STONE_AUDIO, BallHitStone);
         scene.load.audio(KEYS.BALL_HIT_WALL_AUDIO, BallHitWall);
     };
-    
+
+    initAnimations() {
+        this.bombAnim = this.scene.anims.create({
+            key: "bomb-anim",
+            frames: this.scene.anims.generateFrameNumbers("ball-bomb", {
+                start: 0,
+                end: 1
+            }),
+            frameRate: 2,
+            repeat: -1
+        });
+    };
+
     /**Create the Ball Game Object */
     create() {
         this.normalBall = this.scene.physics.add.sprite(0, 0, KEYS.NORMAL_BALL);
         this.normalBall.scale = this.normalBall.scale / 6
         
-        this.glow = this.normalBall.postFX.addGlow("0x39FF14" , 0, undefined, undefined, undefined, 20)
-        this.normalBall.postFX.addShadow(-1, 1, 0.02)
+        this.glow = this.normalBall.postFX.addGlow("0x39FF14" , 0, undefined, undefined, undefined, 20);
+        this.normalBall.postFX.addShadow(-1, 1, 0.02);
+        
+        this.initAnimations();
         
         this.ballHitStoneAudio = this.scene.sound.add(KEYS.BALL_HIT_STONE_AUDIO);
         this.ballHitWallAudio = this.scene.sound.add(KEYS.BALL_HIT_WALL_AUDIO);
@@ -63,12 +80,17 @@ export default class NormalBallObj {
         this.playerRef = playerRef;
         this.mapRef = mapRef;
     };
-
+    
     setBallToBombState() {
         this.BALL_IS_BOMB_STATE = true;
+        this.normalBall.anims.play(this.bombAnim);
         //ADD CHANGE TO BALL AS BOMB ANIMATION!!!!!!!!!!!!!!!!!!!!!!
-    }
-    
+    };
+
+    setPlayerToAi() {
+        this.playerRef.setAiPlayerOnTimer();
+    };
+
     addNormalBallCollider() {
         NormalBallColliders.addCollider(this);
     };
