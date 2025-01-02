@@ -61,6 +61,11 @@ const stoneConfig = {
         {x: 950, y: 250, scale: 0.2, depth: 0},
         {x: 950, y: 350, scale: 0.2, depth: 0},
     ],
+
+    normal_lila_stones: [
+        {x: 1550, y: 500, scale: 0.2, depth: 0},
+        {x: 1750, y: 500, scale: 0.2, depth: 0},
+    ],
 };
 
 export {

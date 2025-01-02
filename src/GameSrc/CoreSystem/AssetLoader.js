@@ -13,7 +13,15 @@ import NormalStoneSprite from "../Assets/SpriteAssets/Stones/StoneGreen.png";
 import RedStoneSprite from "../Assets/SpriteAssets/Stones/RedStone.png";
 import SolidRedStoneSprite from "../Assets/SpriteAssets/Stones/SolidStoneRed.png";
 import NormalStoneAISprite from "../Assets/SpriteAssets/Stones/StoneGreenAi.png";
+import NormalStoneLilaSprite from "../Assets/SpriteAssets/Stones/NormalStoneLila.png";
+import NormalStoneYellowSprite from "../Assets/SpriteAssets/Stones/NormalStoneYellow.png";
+
+//BOMB STONES
 import StoneRedBombSprite from "../Assets/SpriteAssets/Stones/StoneRedBomb.png";
+import BombStoneLilaSprite from "../Assets/SpriteAssets/Stones/BombStoneLila.png";
+import BombStoneYellowSprite from "../Assets/SpriteAssets/Stones/BombStoneYellow.png";
+
+//STONE AUDIOS
 import NormalStoneHitAudio from "../Assets/AudioAssets/BallAudios/hitNormalStone.wav";
 import SolidStoneHitAudio from "../Assets/AudioAssets/BallAudios/HitSolidStone.wav";
 
@@ -65,6 +73,10 @@ export {
     SolidRedStoneSprite,
     NormalStoneAISprite,
     StoneRedBombSprite,
+    NormalStoneLilaSprite,
+    NormalStoneYellowSprite,
+    BombStoneLilaSprite,
+    BombStoneYellowSprite,
     NormalStoneHitAudio,
     SolidStoneHitAudio,
 

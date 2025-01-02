@@ -11,6 +11,9 @@ import NormalStone from "../../../GameObjects/Stones/NormalStone.js";
 import GAME_DATA from "../../../CoreSystem/MainGameHandler.js";
 import NormalStoneAI from "../../../GameObjects/Stones/NormalStoneAI.js";
 
+//TEST FOR LILA STONES
+import NormalLilaStone from "../../../GameObjects/Stones/MultiHitStones/NormalLilaStone.js";
+
 export default class Level1Scene extends Phaser.Scene {
     constructor(mainSceneRef) {
         super();
@@ -21,6 +24,7 @@ export default class Level1Scene extends Phaser.Scene {
         this.NormalStonePool = [];
         this.RedStonePool = [];
         this.NormalStoneAiPool = [];
+        this.NormalLilaStonePool = [];
     };
 
     preload() {
@@ -31,6 +35,9 @@ export default class Level1Scene extends Phaser.Scene {
         RedStone.loadSprites(this);
         NormalStoneAI.loadSprites(this);
         UserInterface.loadSprites(this);
+
+        //TEST FOR LILA STONES
+        NormalLilaStone.loadSprites(this);
     };
 
     loadNextLevel() {
@@ -70,6 +77,12 @@ export default class Level1Scene extends Phaser.Scene {
         this.NormalStonePool = this.stoneGenerator.generateStoneMap(stoneConfig.normal_stones, "normal-stone");
         this.RedStonePool = this.stoneGenerator.generateStoneMap(stoneConfig.red_stones, "red-stone");
         this.NormalStoneAiPool = this.stoneGenerator.generateStoneMap(stoneConfig.normal_stones_ai, "normal-stone-ai");
+
+        //TEST FOR LILA STONES
+        this.NormalLilaStonePool = this.stoneGenerator.generateStoneMap(stoneConfig.normal_lila_stones, "normal-lila-stone");
+
+        //Delet later !!!!!!!!!!!!!!!!!!!!!!!!
+        this.sound.volume = 0.1;
     };
 
     addPlayerWorldCollider() {
@@ -105,5 +118,8 @@ export default class Level1Scene extends Phaser.Scene {
         this.NormalStonePool = this.NormalStonePool.filter((ball) => ball.isDestroyed != true);
         this.RedStonePool = this.RedStonePool.filter((ball) => ball.isDestroyed != true);
         this.NormalStoneAiPool = this.NormalStoneAiPool.filter((ball) => ball.isDestroyed != true);
+
+        //TEST LILA STONES
+        this.NormalLilaStonePool = this.NormalLilaStonePool.filter((ball) => ball.isDestroyed != true);
     };
 };

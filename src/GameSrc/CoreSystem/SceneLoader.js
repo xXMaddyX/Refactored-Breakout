@@ -23,6 +23,7 @@ export default class SceneLoader{
     loadLevel1(oldScene) {
         /**@type {Level1Scene} */
         this.level1 = this.scene.scene.add("SceneLvL1", Level1Scene, true);
+        GAME_DATA.PLAYER_STATES.PLAYER_LIFES = 3;
         this.scene.scene.launch("SceneLvL1");
         GAME_DATA.CURRENT_GAME_STATES.CURRENT_SCENE = "SceneLvL1";
         if (oldScene) {
@@ -33,6 +34,7 @@ export default class SceneLoader{
     loadLevel2(oldScene) {
         /**@type {Level2Scene}*/
         this.level2 = this.scene.scene.add("SceneLvL2", Level2Scene, true);
+        GAME_DATA.PLAYER_STATES.PLAYER_LIFES = 3;
         this.scene.scene.launch("SceneLvL2");
         GAME_DATA.CURRENT_GAME_STATES.CURRENT_SCENE = "SceneLvL2";
         if (oldScene) {
