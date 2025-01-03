@@ -6,6 +6,7 @@ import SolidRedStone from "../GameObjects/Stones/SolidStoneRed.js";
 import NormalBombStone from "../GameObjects/Stones/NormalStoneBomb.js";
 import NormalStoneAI from "../GameObjects/Stones/NormalStoneAI.js";
 import NormalLilaStone from "../GameObjects/Stones/MultiHitStones/NormalLilaStone.js";
+import BombStoneLila from "../GameObjects/Stones/MultiHitStones/BombStoneLils.js";
 
 export default class StoneGenerator {
     constructor(scene) {
@@ -92,6 +93,15 @@ export default class StoneGenerator {
                     stoneArr.push(newStone);
                 });
                 break;
+
+            case "Lila-bomb-stone":
+                map.forEach(({x, y, scale, depth}) => {
+                    /**@type {BombStoneLila} */
+                    let newStone = new BombStoneLila(this.scene);
+                    newStone.create(x, y, scale, depth);
+                    newStone.addOverlapBall(this.ball);
+                    stoneArr.push(newStone);
+                });
         }
         return stoneArr;
     }

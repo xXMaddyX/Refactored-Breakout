@@ -37,6 +37,7 @@ export default class NormalLilaStone {
 
     create(x, y, scale, depth) {
         this.normalLilaStone = this.scene.physics.add.sprite(x, y, "normal-stone-lila").setScale(scale).setDepth(depth);
+        this.normalLilaStone.postFX.addShadow(-1, 1, 0.015);
         this.setDamageState(this.stoneDamageState.FULL_HP);
 
         //ADD AUDIO TO SCENE!!!!!!!!!!!!!!

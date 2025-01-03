@@ -2,6 +2,7 @@ import Phaser from "phaser";
 import TitelScene from "../GameScenesAndLvL/Scenes/TitelScene/TitelScene.js";
 import Level1Scene from "../GameScenesAndLvL/Scenes/SceneLvL1/level1Scene.js";
 import Level2Scene from "../GameScenesAndLvL/Scenes/level2.Scene.js/level2Scene.js";
+import Level3Scene from "../GameScenesAndLvL/Scenes/SceneLvL3/level3Scene.js";
 import GAME_DATA from "./MainGameHandler.js";
 
 export default class SceneLoader{
@@ -40,5 +41,16 @@ export default class SceneLoader{
         if (oldScene) {
             this.scene.scene.remove(oldScene);
         };
-    }
-}
+    };
+
+    loadLevel3(oldScene) {
+        /**@type {Level3Scene} */
+        this.level3 = this.scene.scene.add("SceneLvL3", Level3Scene, true);
+        GAME_DATA.PLAYER_STATES.PLAYER_LIFES = 3;
+        this.scene.scene.launch("SceneLvL3");
+        GAME_DATA.CURRENT_GAME_STATES.CURRENT_SCENE = "SceneLvL3";
+        if (oldScene) {
+            this.scene.scene.remove(oldScene);
+        };
+    };
+};
