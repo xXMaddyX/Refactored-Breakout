@@ -51,7 +51,7 @@ export default class NormalStoneAI {
                 this.takeDamage();
                 this.checkDead();
                 //PLAY AUDIO HERE!!!!!!!!!!!
-                this.scene.time.delayedCall(100, () => {
+                this.scene.time.delayedCall(1000, () => {
                     this.iscollidet = false;
                 });
             };

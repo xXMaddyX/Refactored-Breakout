@@ -34,7 +34,8 @@ export default class NormalBallMoveHandler {
         if (ball.currentMoveDirectionY === ball.BALL_MOVE_Y.DOWN) {
             ball.normalBall.setVelocityY(ball.BALL_MOVE_Y.UP * ball.SPEED);
             ball.currentMoveDirectionY = ball.BALL_MOVE_Y.UP;
-        } else if (ball.currentMoveDirectionY === ball.BALL_MOVE_Y.UP) {
+        }
+        if (ball.currentMoveDirectionY === ball.BALL_MOVE_Y.UP) {
             ball.normalBall.setVelocityY(ball.BALL_MOVE_Y.DOWN * ball.SPEED);
             ball.currentMoveDirectionY = ball.BALL_MOVE_Y.DOWN;
         };

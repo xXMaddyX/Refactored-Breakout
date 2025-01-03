@@ -1,5 +1,5 @@
 import Phaser from "phaser";
-import {  } from "../../../CoreSystem/AssetLoader";
+import { BackgroundLvL3 } from "../../../CoreSystem/AssetLoader";
 import { World3Config, KEYS } from "./map3Config";
 
 export default class Map3 {
@@ -14,7 +14,7 @@ export default class Map3 {
      * @param {Phaser.Scene} scene 
      */
     static loadSprites(scene) {
-        scene.load.image("Background3", BackgroundLvL2);
+        scene.load.image("Background3", BackgroundLvL3);
         //scene.load.audio("music-lvl2", LvL2Music);
     };
     create() {
@@ -24,9 +24,6 @@ export default class Map3 {
             image.depth = depth;
             image.scale = scale;
         });
-
-        this.paraBackground = this.scene.add.image(970, 540, "Background3").setScale(2.1).setAlpha(.5).setDepth(-8);
-        this.paraBackground2 = this.scene.add.image(950, 540, "Background3").setScale(2.1).setAlpha(.7).setDepth(-9);
 
         this.leftBoder = this.scene.add.sprite(0, this.yCenter, null);
         this.leftBoder.alpha = 0;
@@ -55,8 +52,6 @@ export default class Map3 {
 
     update(time, delta) {
         let deltaInSec = delta / 1000;
-        this.paraBackground.rotation += deltaInSec / 8;
-        this.paraBackground2.rotation -= deltaInSec / 10;
         if (this.audio && !this.isAudioStoped) {
             this.playAudio();
         };

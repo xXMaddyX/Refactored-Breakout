@@ -51,7 +51,7 @@ export default class SolidRedStone {
                     this.checkDead();
                 };
 
-                this.scene.time.delayedCall(100, () => {
+                this.scene.time.delayedCall(1000, () => {
                     this.iscollidet = false;
                 });
             };

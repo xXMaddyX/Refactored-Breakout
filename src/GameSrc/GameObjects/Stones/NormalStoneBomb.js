@@ -53,7 +53,7 @@ export default class NormalBombStone {
                 GAME_DATA.GAME_SCORE_SYSTEM.CURRENT_SCORE += this.score;
                 this.takeDamage();
                 this.checkDead();
-                this.scene.time.delayedCall(100, () => {
+                this.scene.time.delayedCall(1000, () => {
                     this.iscollidet = false;
                 });
             };

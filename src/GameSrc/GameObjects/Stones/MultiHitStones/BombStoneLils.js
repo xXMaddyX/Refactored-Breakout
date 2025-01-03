@@ -69,7 +69,7 @@ export default class BombStoneLila {
     };
 
     create(x, y, scale, depth) {
-        this.lilaBombStone = this.scene.physics.add.sprite(x, y).setScale(scale).setDepth(depth);
+        this.lilaBombStone = this.scene.physics.add.sprite(x, y, "lila-bomb-stone").setScale(scale).setDepth(depth);
         this.setDamageState(this.stoneDamageState.FULL_HP);
     };
 
@@ -82,10 +82,13 @@ export default class BombStoneLila {
                 //this.hitAudio.play();
                 this.ballRef.invertBallVelocityDirection();
                 this.ballRef.changeSpeedRandom();
+                if (this.currentDamageState == this.stoneDamageState.LOW_HP) {
+                    this.ballRef.setBallToBombState();
+                };
                 GAME_DATA.GAME_SCORE_SYSTEM.CURRENT_SCORE += this.score;
                 this.takeDamage();
                 this.checkDead();
-                this.scene.time.delayedCall(100, () => {
+                this.scene.time.delayedCall(1000, () => {
                     this.iscollidet = false;
                 });
             };

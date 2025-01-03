@@ -49,7 +49,7 @@ export default class RedStone {
                 this.ballRef.changeSpeedRandom();
                 this.takeDamage();
                 this.checkDead();
-                this.scene.time.delayedCall(100, () => {
+                this.scene.time.delayedCall(1000, () => {
                     this.iscollidet = false;
                 });
             };

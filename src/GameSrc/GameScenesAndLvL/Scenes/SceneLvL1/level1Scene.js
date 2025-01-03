@@ -82,10 +82,6 @@ export default class Level1Scene extends Phaser.Scene {
         this.physics.add.collider(this.player.playerPaddle, this.map.rightBorder);
     };
 
-    loadNextScene() {
-        GAME_DATA.SCENE_REFS.SCENE_LOADER_REF.loadLevel2(GAME_DATA.CURRENT_GAME_STATES.CURRENT_SCENE);
-    };
-
     update(time, delta) {
         if (!this.stopLoop) {
             this.map.update(time, delta);

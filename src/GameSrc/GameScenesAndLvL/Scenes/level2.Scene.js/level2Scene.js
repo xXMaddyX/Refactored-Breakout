@@ -39,7 +39,7 @@ export default class Level2Scene extends Phaser.Scene {
     loadNextLevel() {
         this.map.isAudioStoped = true;
         this.map.audio.stop();
-        //ADD LOAD LEVEL3!!!!!!!!!!!!!!!
+        GAME_DATA.SCENE_REFS.SCENE_LOADER_REF.loadLevel3(GAME_DATA.CURRENT_GAME_STATES.CURRENT_SCENE);
     };
 
     create() {

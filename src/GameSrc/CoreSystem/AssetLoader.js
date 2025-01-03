@@ -48,6 +48,9 @@ import LvL1Music from "../Assets/AudioAssets/LvLAudios/PiepsBreakout.wav";
 import LvL2Music from "../Assets/AudioAssets/LvLAudios/MusicLvL2.wav";
 import BackgroundLvL2 from "../Assets/SpriteAssets/Backgrounds/Level2Background/BackgroundLvL2.png";
 
+//Level3 Imports
+import BackgroundLvL3 from "../Assets/SpriteAssets/Backgrounds/Level3Background/BackgroundLvL3.png";
+
 
 export {
     //PLAYER EXPORTS
@@ -89,6 +92,8 @@ export {
     //LEVEL_EXPORTS
     BackgroundLvL1,
     BackgroundLvL2,
+    BackgroundLvL3,
+    
     LvL1Music,
     LvL2Music
 };

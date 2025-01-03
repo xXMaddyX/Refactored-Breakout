@@ -10,6 +10,7 @@ import StoneGenerator from "../../../CoreSystem/StoneGenerator.js";
 import NormalStone from "../../../GameObjects/Stones/NormalStone.js";
 import NormalLilaStone from "../../../GameObjects/Stones/MultiHitStones/NormalLilaStone.js";
 import NormalStoneAI from "../../../GameObjects/Stones/NormalStoneAI.js";
+import SolidRedStone from "../../../GameObjects/Stones/SolidStoneRed.js";
 import GAME_DATA from "../../../CoreSystem/MainGameHandler.js";
 import BombStoneLila from "../../../GameObjects/Stones/MultiHitStones/BombStoneLils.js";
 
@@ -18,19 +19,30 @@ export default class Level3Scene extends Phaser.Scene {
         super();
         /**@type {Phaser.Scene} */
         this.scene = scene;
+        this.stopLoop = false;
 
         this.NormalStonePool = [];
         this.RedStonePool = [];
         this.solidStonePool = [];
         this.NormalLilaStonePool = [];
         this.LilaBombStonePool = [];
+
+        this.poolStates = {
+            NormalStonePoolEmpty: false,
+            RedStonePoolEmpty: false,
+            SolidStonePoolEmpty: false,
+            NormalLilaStonePoolEmpty: false,
+            LilaBombStonePoolEmpty: false,
+        };
     };
 
     preload() {
         Player.loadSprites(this);
+        Map3.loadSprites(this);
         NormalBallObj.loadSprites(this);
         NormalStone.loadSprites(this);
         RedStone.loadSprites(this);
+        SolidRedStone.loadSprites(this);
         NormalStoneAI.loadSprites(this);
         UserInterface.loadSprites(this);
         BombStoneLila.loadSprites(this);
@@ -77,12 +89,38 @@ export default class Level3Scene extends Phaser.Scene {
         this.physics.add.collider(this.player.playerPaddle, this.map.rightBorder);
     };
 
+    loadNextLevel() {
+        this.map.isAudioStoped = true;
+        this.map.audio.stop()
+        GAME_DATA.SCENE_REFS.SCENE_LOADER_REF.loadLevel4(GAME_DATA.CURRENT_GAME_STATES.CURRENT_SCENE);
+    };
+
+    checkPools() {
+        if (this.NormalStonePool 
+            == 0 && this.LilaBombStonePool 
+            == 0 && this.RedStonePool 
+            == 0 && this.NormalLilaStonePool 
+            == 0 && this.solidStonePool) {
+                this.stopLoop = true;
+                this.player.playerPaddle.setVelocity(0);
+                this.normalBall.normalBall.setVelocity(0);
+                this.UI.showCrushedIt();
+                this.time.delayedCall(5000, () => {
+                    this.UI.hideCrushedIt();
+                    this.UI.showScoreBord();
+                });
+            }
+    }
+
     update(time, delta) {
-        this.map.update(time, delta);
-        this.player.update(time, delta);
-        this.UI.update(time, delta);
-        this.normalBall.update(time, delta);
-        this.updatePools();
+        if (!this.stopLoop) {
+            this.map.update(time, delta);
+            this.player.update(time, delta);
+            this.UI.update(time, delta);
+            this.normalBall.update(time, delta);
+            this.updatePools();
+            this.checkPools();
+        };
 
     };
 
