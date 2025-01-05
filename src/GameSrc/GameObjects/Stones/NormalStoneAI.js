@@ -42,7 +42,7 @@ export default class NormalStoneAI {
     };
 
     addOverlapBall() {
-        let collider = this.scene.physics.add.overlap(this.ballRef.normalBall, this.normalStoneAi, () => {
+        let collider = this.scene.physics.add.collider(this.ballRef.normalBall, this.normalStoneAi, () => {
             if (!this.iscollidet) {
                 this.iscollidet = true;
                 this.ballRef.invertBallVelocityDirection();
@@ -61,6 +61,7 @@ export default class NormalStoneAI {
 
     create(x, y, scale, depth) {
         this.normalStoneAi = this.scene.physics.add.sprite(x, y, "normal-stone-ai");
+        this.normalStoneAi.setImmovable();
         this.normalStoneAi.setScale(scale);
         this.normalStoneAi.setDepth(depth);
         this.normalStoneAi.postFX.addShadow(-1, 1, 0.015);

@@ -39,7 +39,7 @@ export default class SolidRedStone {
     };
 
     addOverlapBall() {
-        let collider = this.scene.physics.add.overlap(this.ballRef.normalBall, this.solidStone, () => {
+        let collider = this.scene.physics.add.collider(this.ballRef.normalBall, this.solidStone, () => {
             if (!this.iscollidet) {
                 this.iscollidet = true;
                 this.ballRef.invertBallVelocityDirection();
@@ -60,7 +60,7 @@ export default class SolidRedStone {
     };
 
     create(x, y, scale, depth) {
-        this.solidStone = this.scene.physics.add.sprite(x, y, "solid-stone-red");
+        this.solidStone = this.scene.physics.add.sprite(x, y, "solid-stone-red").setImmovable();
         this.solidStone.setDepth(depth);
         this.solidStone.setScale(scale);
         this.solidStone.postFX.addShadow(-1, 1, 0.015);

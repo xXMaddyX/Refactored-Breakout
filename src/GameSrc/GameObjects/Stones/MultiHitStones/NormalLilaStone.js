@@ -37,6 +37,7 @@ export default class NormalLilaStone {
 
     create(x, y, scale, depth) {
         this.normalLilaStone = this.scene.physics.add.sprite(x, y, "normal-stone-lila").setScale(scale).setDepth(depth);
+        this.normalLilaStone.setImmovable();
         this.normalLilaStone.postFX.addShadow(-1, 1, 0.015);
         this.setDamageState(this.stoneDamageState.FULL_HP);
 
@@ -79,7 +80,7 @@ export default class NormalLilaStone {
     addOverlapBall(firstObjRef) {
         /**@type {NormalBallObj} */
         this.ballRef = firstObjRef;
-        let collider = this.scene.physics.add.overlap(this.ballRef.normalBall, this.normalLilaStone, () => {
+        let collider = this.scene.physics.add.collider(this.ballRef.normalBall, this.normalLilaStone, () => {
             if (!this.iscollidet) {
                 this.iscollidet = true;
                 //this.hitAudio.play();

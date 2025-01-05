@@ -19,18 +19,22 @@ export default class NormalBallObj {
         this.BALL_IS_FIRED = false;
         this.BALL_IS_BOMB_STATE = false;
 
+        this.ballSpeeds = {
+            SPEED_UP: 500,
+            SPEED_DOWN: 500,
+
+            SPEED_RIGHT: 500,
+            SPEED_LEFT: 500
+        };
+
         this.BALL_MOVE_X = {
-            DEFAULT_LEFT: -1,
             LEFT: -1,
-            DEFAULT_RIGHT: 1,
             RIGHT: 1
         };
         this.currentMoveDirectionX = null;
 
         this.BALL_MOVE_Y = {
-            DEFAULT_UP: -1,
             UP: -1,
-            DEFAULT_DOWN: 1,
             DOWN: 1
         };
         this.currentMoveDirectionY = null;
@@ -79,6 +83,13 @@ export default class NormalBallObj {
         /**@type {Player} */
         this.playerRef = playerRef;
         this.mapRef = mapRef;
+    };
+
+    setBallSpeeds(up, down, left, right) {
+        this.ballSpeeds.SPEED_UP = up;
+        this.ballSpeeds.SPEED_DOWN = down;
+        this.ballSpeeds.SPEED_LEFT = left;
+        this.ballSpeeds.SPEED_RIGHT = right;
     };
     
     setBallToBombState() {
@@ -137,17 +148,14 @@ export default class NormalBallObj {
     }
     
     fireBall() {
-        this.BALL_MOVE_X.UP = -1;
         if (this.playerRef.currentMoveState == this.playerRef.MOVE_STATES.HOLD) {
-            this.BALL_MOVE_X.LEFT = 0;
-            this.BALL_MOVE_X.RIGHT = 0;
+            this.setBallSpeeds(this.DEFAULT_SPEED, this.DEFAULT_SPEED, 0, 0);
         } else if (this.playerRef.currentMoveState == this.playerRef.MOVE_STATES.LEFT) {
-            this.BALL_MOVE_X.LEFT = -2;
+            this.setBallSpeeds(this.DEFAULT_SPEED, this.DEFAULT_SPEED, this.DEFAULT_SPEED, this.DEFAULT_SPEED);
             this.currentMoveDirectionX = this.BALL_MOVE_X.LEFT;
-            
-            
+
         } else if (this.playerRef.currentMoveState == this.playerRef.MOVE_STATES.RIGHT){
-            this.BALL_MOVE_X.RIGHT = 2;
+            this.setBallSpeeds(this.DEFAULT_SPEED, this.DEFAULT_SPEED, this.DEFAULT_SPEED, this.DEFAULT_SPEED);
             this.currentMoveDirectionX = this.BALL_MOVE_X.RIGHT;
             
         }
@@ -166,5 +174,12 @@ export default class NormalBallObj {
         NormalBallMoveHandler.checkBallMove(this);
         this.glowChanger(delta);
         this.checkIfBallIsfired();
-    }
-}
+        if (this.BALL_IS_FIRED) {
+            NormalBallMoveHandler.checkIfBallIsntMove(this);
+        };
+
+        if (this.currentMoveDirectionY == this.BALL_MOVE_Y.UP) {
+            console.log("BALL MOVE UP")
+        }
+    };
+};

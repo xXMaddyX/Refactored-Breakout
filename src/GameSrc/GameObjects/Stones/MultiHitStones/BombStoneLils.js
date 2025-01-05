@@ -70,13 +70,14 @@ export default class BombStoneLila {
 
     create(x, y, scale, depth) {
         this.lilaBombStone = this.scene.physics.add.sprite(x, y, "lila-bomb-stone").setScale(scale).setDepth(depth);
+        this.lilaBombStone.setImmovable();
         this.setDamageState(this.stoneDamageState.FULL_HP);
     };
 
     addOverlapBall(firstObjRef) {
         /**@type {NormalBallObj} */
         this.ballRef = firstObjRef;
-        let collider = this.scene.physics.add.overlap(this.ballRef.normalBall, this.lilaBombStone, () => {
+        let collider = this.scene.physics.add.collider(this.ballRef.normalBall, this.lilaBombStone, () => {
             if (!this.iscollidet) {
                 this.iscollidet = true;
                 //this.hitAudio.play();

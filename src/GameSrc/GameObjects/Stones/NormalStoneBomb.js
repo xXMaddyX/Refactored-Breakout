@@ -44,7 +44,7 @@ export default class NormalBombStone {
     };
 
     addOverlapBall() {
-        let collider = this.scene.physics.add.overlap(this.ballRef.normalBall, this.normalStoneBomb, () => {
+        let collider = this.scene.physics.add.collider(this.ballRef.normalBall, this.normalStoneBomb, () => {
             if (!this.iscollidet) {
                 this.iscollidet = true;
                 this.ballRef.invertBallVelocityDirection();
@@ -63,6 +63,7 @@ export default class NormalBombStone {
 
     create(x, y, scale, depth) {
         this.normalStoneBomb = this.scene.physics.add.sprite(x, y, "normal-stone-bomb");
+        this.normalStoneBomb.setImmovable();
         this.normalStoneBomb.setScale(scale);
         this.normalStoneBomb.setDepth(depth);
         this.normalStoneBomb.postFX.addShadow(-1, 1, 0.015);

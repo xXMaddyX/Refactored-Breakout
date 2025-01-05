@@ -40,7 +40,7 @@ export default class RedStone {
     addOverlapBall(firstObjRef) {
         /**@type {NormalBallObj} */
         this.ballRef = firstObjRef;
-        let collider = this.scene.physics.add.overlap(this.ballRef.normalBall, this.redStone, () => {
+        let collider = this.scene.physics.add.collider(this.ballRef.normalBall, this.redStone, () => {
             if (!this.iscollidet) {
                 this.iscollidet = true;
                 this.hitAudio.play();
@@ -58,7 +58,7 @@ export default class RedStone {
     };
 
     create(x, y, scale, depth) {
-        this.redStone = this.scene.physics.add.sprite(x, y, "red-stone");
+        this.redStone = this.scene.physics.add.sprite(x, y, "red-stone").setImmovable();
         this.redStone.setScale(scale);
         this.redStone.setDepth(depth);
         this.redStone.postFX.addShadow(-1, 1, 0.015)
