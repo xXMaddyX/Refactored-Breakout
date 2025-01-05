@@ -47,10 +47,10 @@ export default class NormalBallMoveHandler {
      * @param {NormalBallObj} ball 
      */
     static changeSpeedRandom(ball) {
-        let newVerticalSpeedRight = Phaser.Math.RND.pick([800, 1000, 700, 500]);
+        let newVerticalSpeedRight = Phaser.Math.RND.pick([300, 400, 500, 600, 800, 1000]);
         ball.ballSpeeds.SPEED_RIGHT = newVerticalSpeedRight;
         
-        let newVerticalSpeedLeft = Phaser.Math.RND.pick([800, 1000, 700, 500]);
+        let newVerticalSpeedLeft = Phaser.Math.RND.pick([300, 400, 500, 600, 800, 1000]);
         ball.ballSpeeds.SPEED_LEFT = newVerticalSpeedLeft;
         
         let newHorizontalSpeedDown = Phaser.Math.RND.pick([800, 1000, 700, 500]);
