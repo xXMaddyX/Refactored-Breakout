@@ -15,6 +15,7 @@ import SolidRedStoneSprite from "../Assets/SpriteAssets/Stones/SolidStoneRed.png
 import NormalStoneAISprite from "../Assets/SpriteAssets/Stones/StoneGreenAi.png";
 import NormalStoneLilaSprite from "../Assets/SpriteAssets/Stones/NormalStoneLila.png";
 import NormalStoneYellowSprite from "../Assets/SpriteAssets/Stones/NormalStoneYellow.png";
+import NormalStoneSpeedSprite from "../Assets/SpriteAssets/Stones/NormalStoneSpeedUpgrade.png";
 
 //STONE SPRITE SHEETS
 import SolidRedStoneSheet from "../Assets/SpriteAssets/Stones/SolidStoneRedDestroySheet.png";
@@ -83,6 +84,9 @@ export {
     NormalStoneYellowSprite,
     BombStoneLilaSprite,
     BombStoneYellowSprite,
+    NormalStoneSpeedSprite,
+
+    //STONE_AUDIO_EXPORTS
     NormalStoneHitAudio,
     SolidStoneHitAudio,
 

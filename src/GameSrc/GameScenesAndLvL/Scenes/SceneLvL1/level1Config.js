@@ -61,6 +61,11 @@ const stoneConfig = {
         {x: 950, y: 250, scale: 0.2, depth: 0},
         {x: 950, y: 350, scale: 0.2, depth: 0},
     ],
+
+    normal_stones_speed: [
+        {x: 950, y: 550, scale: 0.2, depth: 0},
+        {x: 1150, y: 550, scale: 0.2, depth: 0},
+    ]
 };
 
 export {

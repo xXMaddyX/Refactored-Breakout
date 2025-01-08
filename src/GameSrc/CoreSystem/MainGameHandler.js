@@ -30,6 +30,10 @@ const GAME_DATA = {
         IMAGE_DATA: [],
         ANIMATION_DATA: [],
         SOUND_DATA: []
+    },
+
+    GAME_SETTING: {
+        GAME_VOLUME: 0.1,
     }
 };
 

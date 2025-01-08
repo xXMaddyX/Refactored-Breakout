@@ -85,8 +85,7 @@ export default class Level3Scene extends Phaser.Scene {
         this.NormalLilaStonePool = this.stoneGenerator.generateStoneMap(stoneConfigLvL3.lila_stones, "normal-lila-stone");
         this.normalAiStonePool = this.stoneGenerator.generateStoneMap(stoneConfigLvL3.normal_ai_stones, "normal-stone-ai");
 
-        //DELATE LATER!!!!!!!!!!
-        this.sound.volume = 0.5
+        this.sound.volume = GAME_DATA.GAME_SETTING.GAME_VOLUME;
     };
 
     addPlayerWorldCollider() {

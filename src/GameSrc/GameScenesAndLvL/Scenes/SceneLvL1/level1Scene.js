@@ -44,7 +44,6 @@ export default class Level1Scene extends Phaser.Scene {
         this.map = new Map1(this);
         this.map.create();
 
-
         //ADD PLAYER----------------------------->
         this.player = new Player(this);
         this.player.create(this.map.xCenter, this.map.yCenter + 500);
@@ -73,9 +72,7 @@ export default class Level1Scene extends Phaser.Scene {
         this.RedStonePool = this.stoneGenerator.generateStoneMap(stoneConfig.red_stones, "red-stone");
         this.NormalStoneAiPool = this.stoneGenerator.generateStoneMap(stoneConfig.normal_stones_ai, "normal-stone-ai");
 
-
-        //Delet later !!!!!!!!!!!!!!!!!!!!!!!!
-        this.sound.volume = 0.5;
+        this.sound.volume = GAME_DATA.GAME_SETTING.GAME_VOLUME;
     };
 
     addPlayerWorldCollider() {

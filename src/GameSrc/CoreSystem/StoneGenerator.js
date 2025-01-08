@@ -7,6 +7,8 @@ import NormalBombStone from "../GameObjects/Stones/NormalStoneBomb.js";
 import NormalStoneAI from "../GameObjects/Stones/NormalStoneAI.js";
 import NormalLilaStone from "../GameObjects/Stones/MultiHitStones/NormalLilaStone.js";
 import BombStoneLila from "../GameObjects/Stones/MultiHitStones/BombStoneLils.js";
+import NormalStoneSpeed from "../GameObjects/Stones/NormalStoneSpeed.js";
+import Player from "../GameObjects/Player/Player.js";
 
 export default class StoneGenerator {
     constructor(scene) {
@@ -22,7 +24,7 @@ export default class StoneGenerator {
     setBallRef(ballRef) {
         /**@type {NormalBallObj} */
         this.ball = ballRef;
-    }
+    };
 
     generateStoneMap(stoneMap, stoneType) {
         /**@type {Array} */
@@ -102,6 +104,18 @@ export default class StoneGenerator {
                     newStone.addOverlapBall(this.ball);
                     stoneArr.push(newStone);
                 });
+                break;
+
+            case "normal-stone-speed":
+                map.forEach(({x, y, scale, depth}) => {
+                    /**@type {NormalStoneSpeed} */
+                    let newStone = new NormalStoneSpeed(this.scene);
+                    newStone.create(x, y, scale, depth);
+                    newStone.addOverlapBall(this.ball);
+                    newStone.setPlayerRef(this.scene.player);
+                    stoneArr.push(newStone);
+                });
+                break;
         }
         return stoneArr;
     }

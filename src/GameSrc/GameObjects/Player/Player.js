@@ -11,11 +11,17 @@ export default class Player  {
     constructor(scene) {
         /**@type {Phaser.Scene} */
         this.scene = scene;
+
         this.maxLeft = 0;
         this.maxRight = 0;
+
         this.SPEED = 1500;
+        this.SPEED_MUL = 1;
+        this.SPEED_MUL_DEFAULT = 1;
+
         this.aiPlayerIsActive = null;
         this.glowIsActive = false;
+
         this.PlayerLifes = 0;
 
         this.DEAD_LOOP = {
@@ -34,6 +40,10 @@ export default class Player  {
 
         this.PLAYER_SKILLS = {
             aiPlayer: false,
+        };
+
+        this.PLAYER_BUFFS = {
+            isSpeedBuff: false,
         };
     };
 
@@ -105,11 +115,11 @@ export default class Player  {
                 break;
 
             case this.MOVE_STATES.LEFT:
-                this.playerPaddle.setVelocityX(this.MOVE_STATES.LEFT * this.SPEED);
+                this.playerPaddle.setVelocityX(this.MOVE_STATES.LEFT * this.SPEED * this.SPEED_MUL);
                 break;
 
             case this.MOVE_STATES.RIGHT:
-                this.playerPaddle.setVelocityX(this.MOVE_STATES.RIGHT * this.SPEED);
+                this.playerPaddle.setVelocityX(this.MOVE_STATES.RIGHT * this.SPEED * this.SPEED_MUL);
         };
     };
 
@@ -122,13 +132,13 @@ export default class Player  {
 
             case this.MOVE_STATES.LEFT:
                 if (this.playerPaddle.body.velocity.x < this.SPEED) {
-                    this.playerPaddle.setAccelerationX(this.MOVE_STATES.LEFT * this.SPEED);
+                    this.playerPaddle.setAccelerationX(this.MOVE_STATES.LEFT * this.SPEED * this.SPEED_MUL);
                 }
                 break;
 
             case this.MOVE_STATES.RIGHT:
                 if (this.playerPaddle.body.velocity.x < this.SPEED) {
-                    this.playerPaddle.setAccelerationX(this.MOVE_STATES.RIGHT * this.SPEED);
+                    this.playerPaddle.setAccelerationX(this.MOVE_STATES.RIGHT * this.SPEED * this.SPEED_MUL);
                 }
                 break;
         };
@@ -141,6 +151,17 @@ export default class Player  {
             this.aiPlayerIsActive = true;
             this.scene.time.delayedCall(timeInSec, () => {
                 this.aiPlayerIsActive = false;
+            });
+        };
+    };
+
+    setPlayerOnSpeedBuff(speedMul) {
+        this.SPEED_MUL = speedMul;
+        if (!this.PLAYER_BUFFS.isSpeedBuff) {
+            this.PLAYER_BUFFS.isSpeedBuff = true;
+            this.scene.time.delayedCall(3000, () => {
+                this.SPEED_MUL = this.SPEED_MUL_DEFAULT;
+                this.PLAYER_BUFFS.isSpeedBuff = false;
             });
         };
     };

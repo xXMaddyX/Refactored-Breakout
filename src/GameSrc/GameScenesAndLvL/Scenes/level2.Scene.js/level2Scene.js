@@ -74,8 +74,7 @@ export default class Level2Scene extends Phaser.Scene {
         this.SolidRedStonePool = this.stoneGenerator.generateStoneMap(StoneConfigLvL2.SolidStones, "solid-stone-red");
         this.NormalStoneBombPool = this.stoneGenerator.generateStoneMap(StoneConfigLvL2.NormalStonesBomb, "normal-stone-bomb");
 
-        //DELETE_LATER!!!!!!!!!!!!!!!!!!!!!!!
-        this.sound.volume = 0.5;
+        this.sound.volume = GAME_DATA.GAME_SETTING.GAME_VOLUME;
     };
 
     addPlayerWorldCollider() {
