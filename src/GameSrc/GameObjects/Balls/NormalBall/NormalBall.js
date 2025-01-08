@@ -17,12 +17,11 @@ export default class NormalBallObj {
         this.DEFAULT_SPEED = 500;
         this.SPEED = this.DEFAULT_SPEED;
         this.BALL_IS_FIRED = false;
-        this.BALL_IS_BOMB_STATE = false;
+        this.BALL_IS_BOMB_STATE = true; //set it back to false
 
         this.ballSpeeds = {
             SPEED_UP: 500,
             SPEED_DOWN: 500,
-
             SPEED_RIGHT: 500,
             SPEED_LEFT: 500
         };
@@ -95,7 +94,7 @@ export default class NormalBallObj {
     setBallToBombState() {
         this.BALL_IS_BOMB_STATE = true;
         this.normalBall.anims.play(this.bombAnim);
-        //ADD CHANGE TO BALL AS BOMB ANIMATION!!!!!!!!!!!!!!!!!!!!!!
+        //ADD CHANGE TO BALL AS BOMB ANIMATION!!!!!!!!!!!!!!!!!!!!!!????
     };
 
     setPlayerToAi() {
@@ -143,9 +142,9 @@ export default class NormalBallObj {
             if (this.glow.outerStrength <= 0) {
                 this.glow.outerStrength = 0;
                 this.glowIncreasing = true;
-            }
-        }
-    }
+            };
+        };
+    };
     
     fireBall() {
         if (this.playerRef.currentMoveState == this.playerRef.MOVE_STATES.HOLD) {
@@ -158,17 +157,17 @@ export default class NormalBallObj {
             this.setBallSpeeds(this.DEFAULT_SPEED, this.DEFAULT_SPEED, this.DEFAULT_SPEED, this.DEFAULT_SPEED);
             this.currentMoveDirectionX = this.BALL_MOVE_X.RIGHT;
             
-        }
+        };
         this.currentMoveDirectionY = this.BALL_MOVE_Y.UP;
         this.BALL_IS_FIRED = true;
-    }
+    };
 
     checkIfBallIsfired() {
         if (!this.BALL_IS_FIRED) {
             this.normalBall.x = this.playerRef.playerPaddle.x;
             this.normalBall.y = this.playerRef.playerPaddle.y - 70;
-        }
-    }
+        };
+    };
     
     update(time, delta) {
         NormalBallMoveHandler.checkBallMove(this);
@@ -179,7 +178,7 @@ export default class NormalBallObj {
         };
 
         if (this.currentMoveDirectionY == this.BALL_MOVE_Y.UP) {
-            console.log("BALL MOVE UP")
-        }
+            console.log("BALL MOVE UP");
+        };
     };
 };

@@ -1,6 +1,5 @@
 import NormalBallObj from "./NormalBall";
 
-
 export default class NormalBallMoveHandler {
     /**
      * @param {NormalBallObj} ball 
@@ -25,7 +24,6 @@ export default class NormalBallMoveHandler {
                 break;
         };
     };
-
     /**
      * 
      * @param {NormalBallObj} ball 
@@ -41,7 +39,6 @@ export default class NormalBallMoveHandler {
         ball.normalBall.setVelocityX(newDirection * ball.SPEED);
         ball.currentMoveDirectionX = newDirection;
     };
-
     /**
      * 
      * @param {NormalBallObj} ball 
@@ -59,7 +56,6 @@ export default class NormalBallMoveHandler {
         let newHorizontalSpeedUP = Phaser.Math.RND.pick([800, 1000, 700, 500]);
         ball.ballSpeeds.SPEED_UP = newHorizontalSpeedUP;       
     };
-
     /**
      * 
      * @param {NormalBallObj} ball 
@@ -70,6 +66,6 @@ export default class NormalBallMoveHandler {
         };
         if (ball.normalBall.body.velocity.y == 0) {
             ball.normalBall.setVelocityY(ball.currentMoveDirectionY * ball.SPEED);
-        }
-    }
+        };
+    };
 };

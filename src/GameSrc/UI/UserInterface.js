@@ -48,6 +48,11 @@ export default class UserInterface {
         this.Ai_Button.on("pointerdown", () => {
             if (this.playerPaddelRef) {
                 this.playerPaddelRef.setAiPlayerActive(!this.playerPaddelRef.aiPlayerIsActive);
+                if (this.playerPaddelRef.aiPlayerIsActive) {
+                    this.Button_Rectangel.setFillStyle(0x90EE90)
+                } else {
+                    this.Button_Rectangel.setFillStyle(0xff0000)
+                }
             };
         });
         //-------------------------------->

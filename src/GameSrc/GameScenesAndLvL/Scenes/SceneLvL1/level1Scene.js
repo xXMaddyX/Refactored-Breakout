@@ -44,6 +44,7 @@ export default class Level1Scene extends Phaser.Scene {
         this.map = new Map1(this);
         this.map.create();
 
+
         //ADD PLAYER----------------------------->
         this.player = new Player(this);
         this.player.create(this.map.xCenter, this.map.yCenter + 500);
@@ -74,7 +75,7 @@ export default class Level1Scene extends Phaser.Scene {
 
 
         //Delet later !!!!!!!!!!!!!!!!!!!!!!!!
-        this.sound.volume = 0.1;
+        this.sound.volume = 0.5;
     };
 
     addPlayerWorldCollider() {

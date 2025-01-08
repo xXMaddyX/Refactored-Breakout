@@ -17,7 +17,7 @@ import BombStoneLila from "../../../GameObjects/Stones/MultiHitStones/BombStoneL
 export default class Level3Scene extends Phaser.Scene {
     constructor(scene) {
         super();
-        /**@type {Phaser.Scene} */
+        /**@type {MainScene} */
         this.scene = scene;
         this.stopLoop = false;
 
@@ -26,6 +26,7 @@ export default class Level3Scene extends Phaser.Scene {
         this.solidStonePool = [];
         this.NormalLilaStonePool = [];
         this.LilaBombStonePool = [];
+        this.normalAiStonePool = [];
 
         this.poolStates = {
             NormalStonePoolEmpty: false,
@@ -82,6 +83,10 @@ export default class Level3Scene extends Phaser.Scene {
         this.solidStonePool = this.stoneGenerator.generateStoneMap(stoneConfigLvL3.solid_stones, "solid-stone-red");
         this.LilaBombStonePool = this.stoneGenerator.generateStoneMap(stoneConfigLvL3.lila_bomb_stones, "Lila-bomb-stone");
         this.NormalLilaStonePool = this.stoneGenerator.generateStoneMap(stoneConfigLvL3.lila_stones, "normal-lila-stone");
+        this.normalAiStonePool = this.stoneGenerator.generateStoneMap(stoneConfigLvL3.normal_ai_stones, "normal-stone-ai");
+
+        //DELATE LATER!!!!!!!!!!
+        this.sound.volume = 0.5
     };
 
     addPlayerWorldCollider() {
@@ -92,7 +97,7 @@ export default class Level3Scene extends Phaser.Scene {
     loadNextLevel() {
         this.map.isAudioStoped = true;
         this.map.audio.stop()
-        GAME_DATA.SCENE_REFS.SCENE_LOADER_REF.loadLevel4(GAME_DATA.CURRENT_GAME_STATES.CURRENT_SCENE);
+        GAME_DATA.SCENE_REFS.SCENE_LOADER_REF.loadTitelScene(GAME_DATA.CURRENT_GAME_STATES.CURRENT_SCENE);
     };
 
     checkPools() {
@@ -109,8 +114,8 @@ export default class Level3Scene extends Phaser.Scene {
                     this.UI.hideCrushedIt();
                     this.UI.showScoreBord();
                 });
-            }
-    }
+            };
+    };
 
     update(time, delta) {
         if (!this.stopLoop) {
@@ -120,6 +125,10 @@ export default class Level3Scene extends Phaser.Scene {
             this.normalBall.update(time, delta);
             this.updatePools();
             this.checkPools();
+
+            this.solidStonePool.forEach((stone) => {
+                stone.update(time, delta);
+            });
         };
 
     };
@@ -130,5 +139,6 @@ export default class Level3Scene extends Phaser.Scene {
         this.solidStonePool = this.solidStonePool.filter((stone) => stone.isDestroyed != true);
         this.LilaBombStonePool = this.LilaBombStonePool.filter((stone) => stone.isDestroyed != true);
         this.NormalLilaStonePool = this. NormalLilaStonePool.filter((stone) => stone.isDestroyed != true);
+        this.normalAiStonePool = this.normalAiStonePool.filter((stone) => stone.isDestroyed != true);
     };
 };

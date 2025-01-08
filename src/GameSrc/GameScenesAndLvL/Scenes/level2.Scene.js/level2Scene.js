@@ -75,7 +75,7 @@ export default class Level2Scene extends Phaser.Scene {
         this.NormalStoneBombPool = this.stoneGenerator.generateStoneMap(StoneConfigLvL2.NormalStonesBomb, "normal-stone-bomb");
 
         //DELETE_LATER!!!!!!!!!!!!!!!!!!!!!!!
-        this.sound.volume = 0.1;
+        this.sound.volume = 0.5;
     };
 
     addPlayerWorldCollider() {
@@ -99,6 +99,10 @@ export default class Level2Scene extends Phaser.Scene {
                 this.UI.showScoreBord();
             });
         };
+
+        this.SolidRedStonePool.forEach((stone) => {
+            stone.update(time, delta);
+        });
     };
 
     updatePools() {

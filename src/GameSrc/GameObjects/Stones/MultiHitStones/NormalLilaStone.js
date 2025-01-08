@@ -1,5 +1,5 @@
 import Phaser from "phaser";
-import { NormalStoneLilaSprite, NormalStoneSprite, NormalStoneYellowSprite } from "../../../CoreSystem/AssetLoader";
+import { NormalStoneLilaSprite, NormalStoneSprite, NormalStoneYellowSprite, NormalStoneHitAudio } from "../../../CoreSystem/AssetLoader";
 import GAME_DATA from "../../../CoreSystem/MainGameHandler";
 
 export default class NormalLilaStone {
@@ -28,7 +28,7 @@ export default class NormalLilaStone {
         if (!sceneRef.textures.exists("normal-yellow-stone")) sceneRef.load.image("normal-yellow-stone", NormalStoneYellowSprite);
         if (!sceneRef.textures.exists("normal-stone-lila")) sceneRef.load.image("normal-stone-lila", NormalStoneLilaSprite);
 
-        //ADD LOAD AUTIO!!!!!!!!!!!
+        sceneRef.load.audio("normal-stone-lila-audio", NormalStoneHitAudio);
     };
 
     setDamageState(newState) {
@@ -41,7 +41,7 @@ export default class NormalLilaStone {
         this.normalLilaStone.postFX.addShadow(-1, 1, 0.015);
         this.setDamageState(this.stoneDamageState.FULL_HP);
 
-        //ADD AUDIO TO SCENE!!!!!!!!!!!!!!
+        this.hitAudio = this.scene.sound.add("normal-stone-lila-audio");
     };
 
     takeDamage() {
@@ -83,7 +83,7 @@ export default class NormalLilaStone {
         let collider = this.scene.physics.add.collider(this.ballRef.normalBall, this.normalLilaStone, () => {
             if (!this.iscollidet) {
                 this.iscollidet = true;
-                //this.hitAudio.play();
+                this.hitAudio.play();
                 this.ballRef.invertBallVelocityDirection();
                 this.ballRef.changeSpeedRandom();
                 GAME_DATA.GAME_SCORE_SYSTEM.CURRENT_SCORE += this.score;

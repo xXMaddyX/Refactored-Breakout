@@ -1,5 +1,5 @@
 import Phaser from "phaser";
-import { BombStoneLilaSprite, StoneRedBombSprite, BombStoneYellowSprite } from "../../../CoreSystem/AssetLoader";
+import { BombStoneLilaSprite, StoneRedBombSprite, BombStoneYellowSprite, NormalStoneHitAudio } from "../../../CoreSystem/AssetLoader";
 import GAME_DATA from "../../../CoreSystem/MainGameHandler";
 
 export default class BombStoneLila {
@@ -28,7 +28,7 @@ export default class BombStoneLila {
         if (!sceneRef.textures.exists("yellow-bomb-stone")) sceneRef.load.image("yellow-bomb-stone", BombStoneYellowSprite);
         if (!sceneRef.textures.exists("lila-bomb-stone")) sceneRef.load.image("lila-bomb-stone", BombStoneLilaSprite);
 
-        // ADD AUDIO!!!!!!!!!!!!!!!!
+        sceneRef.load.audio("lila-bomb-stone-audio", NormalStoneHitAudio);
     };
 
     setDamageState(newState) {
@@ -72,6 +72,8 @@ export default class BombStoneLila {
         this.lilaBombStone = this.scene.physics.add.sprite(x, y, "lila-bomb-stone").setScale(scale).setDepth(depth);
         this.lilaBombStone.setImmovable();
         this.setDamageState(this.stoneDamageState.FULL_HP);
+
+        this.hitAudio = this.scene.sound.add("lila-bomb-stone-audio");
     };
 
     addOverlapBall(firstObjRef) {
@@ -80,7 +82,7 @@ export default class BombStoneLila {
         let collider = this.scene.physics.add.collider(this.ballRef.normalBall, this.lilaBombStone, () => {
             if (!this.iscollidet) {
                 this.iscollidet = true;
-                //this.hitAudio.play();
+                this.hitAudio.play();
                 this.ballRef.invertBallVelocityDirection();
                 this.ballRef.changeSpeedRandom();
                 if (this.currentDamageState == this.stoneDamageState.LOW_HP) {
