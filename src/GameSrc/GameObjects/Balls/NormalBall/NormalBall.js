@@ -17,7 +17,7 @@ export default class NormalBallObj {
         this.DEFAULT_SPEED = 500;
         this.SPEED = this.DEFAULT_SPEED;
         this.BALL_IS_FIRED = false;
-        this.BALL_IS_BOMB_STATE = true; //set it back to false
+        this.BALL_IS_BOMB_STATE = false;
 
         this.ballSpeeds = {
             SPEED_UP: 500,
@@ -94,7 +94,6 @@ export default class NormalBallObj {
     setBallToBombState() {
         this.BALL_IS_BOMB_STATE = true;
         this.normalBall.anims.play(this.bombAnim);
-        //ADD CHANGE TO BALL AS BOMB ANIMATION!!!!!!!!!!!!!!!!!!!!!!????
     };
 
     setPlayerToAi() {

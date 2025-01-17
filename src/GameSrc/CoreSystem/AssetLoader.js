@@ -54,6 +54,7 @@ import BackgroundLvL2 from "../Assets/SpriteAssets/Backgrounds/Level2Background/
 
 //Level3 Imports
 import BackgroundLvL3 from "../Assets/SpriteAssets/Backgrounds/Level3Background/BackgroundLvL3.png";
+import LvL3Music from "../Assets/AudioAssets/LvLAudios/MusicLvL3.wav";
 
 
 export {
@@ -105,5 +106,6 @@ export {
     BackgroundLvL3,
     
     LvL1Music,
-    LvL2Music
+    LvL2Music,
+    LvL3Music
 };

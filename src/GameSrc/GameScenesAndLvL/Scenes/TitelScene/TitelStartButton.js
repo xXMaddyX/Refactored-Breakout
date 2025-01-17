@@ -1,5 +1,4 @@
 import TitelScene from "./TitelScene.js";
-import Phaser from "phaser";
 
 export default class TitelButtons {
     /**

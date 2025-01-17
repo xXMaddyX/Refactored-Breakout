@@ -1,6 +1,6 @@
 import Phaser from "phaser";
 import MainScene from "../../../CoreSystem/MainScene.js";
-import Map3 from "../../Worlds/map3.js/map3.js";
+import Map3 from "../../Worlds/LvL3/map3.js";
 import { stoneConfigLvL3 } from "./level3.Config.js";
 import Player from "../../../GameObjects/Player/Player.js";
 import UserInterface from "../../../UI/UserInterface.js";
