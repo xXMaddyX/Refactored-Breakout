@@ -54,6 +54,7 @@ export default class Level4Scene extends Phaser.Scene {
     create() {
         /**@type {Map4} */
         this.map = new Map4(this);
+        this.map.create();
 
         //ADD PLAYER----------------------------------->
         this.player = new Player(this);
@@ -66,6 +67,7 @@ export default class Level4Scene extends Phaser.Scene {
         this.normalBall = new NormalBallObj(this);
         this.normalBall.create();
         this.player.addBallRef(this.normalBall);
+        this.normalBall.addPlayerRef(this.player, this.map)
         this.normalBall.addNormalBallCollider();
 
         this.UI = new UserInterface(this);
@@ -79,6 +81,7 @@ export default class Level4Scene extends Phaser.Scene {
         this.stoneGenerator.setBallRef(this.normalBall);
 
         //ADD STONES TO POOLS AND GENERATE!!!!!!!!!!!!!!
+        this.NormalStonePool = this.stoneGenerator.generateStoneMap(stoneConfigLvL4.normal_stones, "normal-stone");
     };
     addPlayerWorldCollider() {
         this.physics.add.collider(this.player.playerPaddle, this.map.leftBoder);

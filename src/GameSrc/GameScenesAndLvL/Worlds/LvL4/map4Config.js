@@ -5,6 +5,10 @@ const calcBackPositionY = (position) => {
     return position + 540;
 };
 
+const KEYS = {
+    KEY_BACKGROUND: "Background4",
+}
+
 const World4Config = {
     backgroundPositions: [
         {x: calcBackPositionX(0), y: calcBackPositionY(0), key: KEYS.KEY_BACKGROUND, alpha: 1, depth: -10, scale: 1}

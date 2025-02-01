@@ -1,5 +1,6 @@
 import Phaser from "phaser";
-import { World4Config } from "./map4Config";
+import { World4Config } from "./map4Config.js";
+import { BackgroundLvL4 } from "../../../CoreSystem/AssetLoader.js";
 
 export default class Map4 {
     constructor(scene) {
@@ -16,11 +17,17 @@ export default class Map4 {
      * @param {Phaser.Scene} scene 
      */
     static loadSprites(scene) {
-        if (!scene.textures.exists("Background4")) scene.load.image("Background4", "ADD IMAGE PATH");
+        scene.load.image("Background4", BackgroundLvL4);
         //ADD SOUND TO MAP!!!!!!!!!!!!!
     };
 
     create() {
+        World4Config.backgroundPositions.forEach(({x, y, key, alpha, depth, scale}) => {
+            let image = this.scene.add.image(x, y, "Background4");
+            image.alpha = alpha;
+            image.depth = depth;
+            image.scale = scale;
+        });
 
         this.leftBoder = this.scene.add.sprite(0, this.yCenter, null);
         this.leftBoder.alpha = 0;

@@ -12,7 +12,7 @@ export default class TitelButtons {
 
         titelScene.startButton.setInteractive();
         titelScene.startButton.on("pointerdown", () => {
-            titelScene.sceneLoaderRef.loadLevel3("TitelScene");
+            titelScene.sceneLoaderRef.loadLevel1("TitelScene");
         });
         titelScene.startButton.on("pointerover", () => {
             titelScene.startButtonGlow.active = true;
