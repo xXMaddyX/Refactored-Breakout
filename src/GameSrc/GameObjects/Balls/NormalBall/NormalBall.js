@@ -80,10 +80,12 @@ export default class NormalBallObj {
         }
         this.normalBall.scale = this.normalBall.scale / 6
         
-        this.glow = this.normalBall.postFX.addGlow("0x39FF14" , 0, undefined, undefined, undefined, 20);
+        //NEED TO FIX POSTFX LAG; MAYBE SHADER!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        if (this.IS_MAIN_BALL) {
+            this.glow = this.normalBall.postFX.addGlow("0x39FF14" , 0, undefined, undefined, undefined, 20);
+            this.initAnimations();
+        }
         this.normalBall.postFX.addShadow(-1, 1, 0.02);
-        
-        this.initAnimations();
         
         this.ballHitStoneAudio = this.scene.sound.add(KEYS.BALL_HIT_STONE_AUDIO);
         this.ballHitWallAudio = this.scene.sound.add(KEYS.BALL_HIT_WALL_AUDIO);
@@ -198,15 +200,10 @@ export default class NormalBallObj {
     update(time, delta) {
         if (!this.isDestroyed) {
             NormalBallMoveHandler.checkBallMove(this);
-            this.glowChanger(delta);
+            if (this.IS_MAIN_BALL) {this.glowChanger(delta);};
             this.checkIfBallIsfired();
         }
-        if (this.BALL_IS_FIRED && !this.isDestroyed) {
-            NormalBallMoveHandler.checkIfBallIsntMove(this);
-        };
-
-        if (!this.IS_MAIN_BALL) {
-            this.checkBallDeath();
-        };
+        if (this.BALL_IS_FIRED && !this.isDestroyed) {NormalBallMoveHandler.checkIfBallIsntMove(this);};
+        if (!this.IS_MAIN_BALL) {this.checkBallDeath();};
     };
 };

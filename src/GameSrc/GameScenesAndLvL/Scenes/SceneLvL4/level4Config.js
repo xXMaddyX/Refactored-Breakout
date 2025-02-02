@@ -10,38 +10,14 @@ const stoneConfigLvL4 = {
         {x: 1550, y: 100, scale: 0.2, depth: 0},
         {x: 1750, y: 100, scale: 0.2, depth: 0},
     ],
-    red_stones: [
+    red_stones: [],
+    lila_stones: [],
+    lila_bomb_stones: [],
+    solid_stones: [],
+    normal_ai_stones: [],
+    normal_tripple_stones: [
         {x: 250, y: 150, scale: 0.2, depth: 0},
         {x: 450, y: 150, scale: 0.2, depth: 0},
-        {x: 650, y: 150, scale: 0.2, depth: 0},
-        {x: 850, y: 150, scale: 0.2, depth: 0},
-        {x: 1050, y: 150, scale: 0.2, depth: 0},
-        {x: 1250, y: 150, scale: 0.2, depth: 0},
-        {x: 1450, y: 150, scale: 0.2, depth: 0},
-        {x: 1650, y: 150, scale: 0.2, depth: 0},
-
-    ],
-    lila_stones: [
-        {x: 150, y: 350, scale: 0.2, depth: 0},
-        {x: 350, y: 350, scale: 0.2, depth: 0},
-        {x: 550, y: 350, scale: 0.2, depth: 0},
-        {x: 750, y: 350, scale: 0.2, depth: 0},
-        {x: 1150, y: 350, scale: 0.2, depth: 0},
-        {x: 1350, y: 350, scale: 0.2, depth: 0},
-        {x: 1550, y: 350, scale: 0.2, depth: 0},
-        {x: 1750, y: 350, scale: 0.2, depth: 0},
-
-    ],
-    lila_bomb_stones: [
-        {x: 950, y: 350, scale: 0.2, depth: 0},
-    ],
-    solid_stones: [
-        {x: 150, y: 200, scale: 0.2, depth: 0},
-        {x: 350, y: 200, scale: 0.2, depth: 0},
-    ],
-    normal_ai_stones: [
-        {x: 350, y: 450, scale: 0.2, depth: 0},
-        {x: 1550, y: 450, scale: 0.2, depth: 0},
     ]
 };
 

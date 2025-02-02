@@ -13,6 +13,7 @@ import NormalStoneAI from "../../../GameObjects/Stones/NormalStoneAI.js";
 import SolidRedStone from "../../../GameObjects/Stones/SolidStoneRed.js";
 import GAME_DATA from "../../../CoreSystem/MainGameHandler.js";
 import BombStoneLila from "../../../GameObjects/Stones/MultiHitStones/BombStoneLils.js";
+import TrippleBallStone from "../../../GameObjects/Stones/TrippleBallStone.js";
 
 export default class Level4Scene extends Phaser.Scene {
     constructor(scene) {
@@ -28,6 +29,7 @@ export default class Level4Scene extends Phaser.Scene {
         this.NormalLilaStonePool = [];
         this.LilaBombStonePool = [];
         this.normalAiStonePool = [];
+        this.NormalTrippleStonesPool = [];
 
         //BALL_POOL-------------->
         this.NormalBallPool = [];
@@ -53,6 +55,7 @@ export default class Level4Scene extends Phaser.Scene {
         UserInterface.loadSprites(this);
         BombStoneLila.loadSprites(this);
         NormalLilaStone.loadSprites(this);
+        TrippleBallStone.loadSprite(this);
     };
 
     create() {
@@ -87,10 +90,11 @@ export default class Level4Scene extends Phaser.Scene {
 
         //ADD STONES TO POOLS AND GENERATE!!!!!!!!!!!!!!
         this.NormalStonePool = this.stoneGenerator.generateStoneMap(stoneConfigLvL4.normal_stones, "normal-stone");
+        this.NormalTrippleStonesPool = this.stoneGenerator.generateStoneMap(stoneConfigLvL4.normal_tripple_stones, "normal-tripple-stone");
 
-        this.time.delayedCall(5000, () => {
-            this.ballSplitter();
-        })
+        //this.time.delayedCall(5000, () => {
+            //this.ballSplitter();
+        //})
     };
     addPlayerWorldCollider() {
         this.physics.add.collider(this.player.playerPaddle, this.map.leftBoder);

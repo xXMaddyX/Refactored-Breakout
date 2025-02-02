@@ -8,6 +8,7 @@ import NormalStoneAI from "../GameObjects/Stones/NormalStoneAI.js";
 import NormalLilaStone from "../GameObjects/Stones/MultiHitStones/NormalLilaStone.js";
 import BombStoneLila from "../GameObjects/Stones/MultiHitStones/BombStoneLils.js";
 import NormalStoneSpeed from "../GameObjects/Stones/NormalStoneSpeed.js";
+import TrippleBallStone from "../GameObjects/Stones/TrippleBallStone.js";
 import Player from "../GameObjects/Player/Player.js";
 
 export default class StoneGenerator {
@@ -113,6 +114,16 @@ export default class StoneGenerator {
                     newStone.create(x, y, scale, depth);
                     newStone.addOverlapBall(this.ball);
                     newStone.setPlayerRef(this.scene.player);
+                    stoneArr.push(newStone);
+                });
+                break;
+
+            case "normal-tripple-stone":
+                map.forEach(({x, y, scale, depth}) => {
+                    /**@type {TrippleBallStone} */
+                    let newStone = new TrippleBallStone(this.scene);
+                    newStone.create(x, y, scale, depth);
+                    newStone.addOverlapBall(this.ball);
                     stoneArr.push(newStone);
                 });
                 break;
