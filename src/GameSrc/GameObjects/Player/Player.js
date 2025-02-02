@@ -256,6 +256,8 @@ export default class Player  {
     };
 
     deadLoopHandler() {
+        //IF BALL_POOL LENGTH < 1 THEN KILL PADDEL
+        //CHECK POOL AT SCENE
         if (this.ballRef.normalBall.y >= 1200) {
             this.DEAD_LOOP.deadLoopStart = true;
         };

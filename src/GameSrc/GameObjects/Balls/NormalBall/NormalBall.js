@@ -2,10 +2,11 @@ import Phaser from "phaser";
 import Player from "../../Player/Player.js";
 import NormalBallMoveHandler from "./NormalBallMoveHandler.js";
 import NormalBallColliders from "./NormalBallColliders.js";
-import { NormalBall, BallHitStone, BallHitWall, BombBall } from "../../../CoreSystem/AssetLoader.js";
+import { NormalBall, BallHitStone, BallHitWall, BombBall, TrippleBall } from "../../../CoreSystem/AssetLoader.js";
 
 const KEYS = {
     NORMAL_BALL: "normal-ball",
+    TRIPPLE_BALL: "tripple-ball",
     BALL_HIT_WALL_AUDIO: "ball-hit-wall",
     BALL_HIT_STONE_AUDIO: "ball-hit-stone",
 }
@@ -18,6 +19,11 @@ export default class NormalBallObj {
         this.SPEED = this.DEFAULT_SPEED;
         this.BALL_IS_FIRED = false;
         this.BALL_IS_BOMB_STATE = false;
+        //TEST--------->
+        this.IS_MAIN_BALL = false;
+        this.isDestroyed = false;
+
+        this.colliderPool = [];
 
         this.ballSpeeds = {
             SPEED_UP: 500,
@@ -44,6 +50,7 @@ export default class NormalBallObj {
         /**@type {Phaser.Scene} */
         let scene = sceneIn;
         if (!scene.textures.exists(KEYS.NORMAL_BALL)) scene.load.image(KEYS.NORMAL_BALL, NormalBall);
+        if (!scene.textures.exists(KEYS.TRIPPLE_BALL)) scene.load.image(KEYS.TRIPPLE_BALL, TrippleBall);
         if (!scene.textures.exists("ball-bomb")) scene.load.spritesheet("ball-bomb", BombBall, {
             frameHeight: 343, frameWidth: 351
         });
@@ -66,7 +73,11 @@ export default class NormalBallObj {
 
     /**Create the Ball Game Object */
     create() {
-        this.normalBall = this.scene.physics.add.sprite(0, 0, KEYS.NORMAL_BALL);
+        if (this.IS_MAIN_BALL) {
+            this.normalBall = this.scene.physics.add.sprite(0, 0, KEYS.NORMAL_BALL);
+        } else if (!this.IS_MAIN_BALL) {
+            this.normalBall = this.scene.physics.add.sprite(0, 0, KEYS.TRIPPLE_BALL);
+        }
         this.normalBall.scale = this.normalBall.scale / 6
         
         this.glow = this.normalBall.postFX.addGlow("0x39FF14" , 0, undefined, undefined, undefined, 20);
@@ -77,6 +88,11 @@ export default class NormalBallObj {
         this.ballHitStoneAudio = this.scene.sound.add(KEYS.BALL_HIT_STONE_AUDIO);
         this.ballHitWallAudio = this.scene.sound.add(KEYS.BALL_HIT_WALL_AUDIO);
     };
+
+    setPosition(x, y) {
+        this.normalBall.x = x;
+        this.normalBall.y = y;
+    }
     
     addPlayerRef(playerRef, mapRef) {
         /**@type {Player} */
@@ -101,7 +117,7 @@ export default class NormalBallObj {
     };
 
     addNormalBallCollider() {
-        NormalBallColliders.addCollider(this);
+        this.colliderPool = NormalBallColliders.addCollider(this);
     };
 
     changeSpeedRandom() {
@@ -167,17 +183,30 @@ export default class NormalBallObj {
             this.normalBall.y = this.playerRef.playerPaddle.y - 70;
         };
     };
+
+    checkBallDeath() {
+        if (this.normalBall.y >= 2000 && !this.isDestroyed) {
+            this.isDestroyed = true;
+            this.normalBall.destroy();
+            this.colliderPool.forEach((collider) => {
+                collider.destroy();
+            });
+            this.colliderPool = null;
+        };
+    };
     
     update(time, delta) {
-        NormalBallMoveHandler.checkBallMove(this);
-        this.glowChanger(delta);
-        this.checkIfBallIsfired();
-        if (this.BALL_IS_FIRED) {
+        if (!this.isDestroyed) {
+            NormalBallMoveHandler.checkBallMove(this);
+            this.glowChanger(delta);
+            this.checkIfBallIsfired();
+        }
+        if (this.BALL_IS_FIRED && !this.isDestroyed) {
             NormalBallMoveHandler.checkIfBallIsntMove(this);
         };
 
-        if (this.currentMoveDirectionY == this.BALL_MOVE_Y.UP) {
-            console.log("BALL MOVE UP");
+        if (!this.IS_MAIN_BALL) {
+            this.checkBallDeath();
         };
     };
 };

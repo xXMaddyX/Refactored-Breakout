@@ -39,13 +39,13 @@ export default class NormalStone {
 
     addOverlapBall(firstObjRef) {
         /**@type {NormalBallObj} */
-        this.ballRef = firstObjRef;
-        let collider = this.scene.physics.add.collider(this.ballRef.normalBall, this.normalStone, () => {
+        let ballRef = firstObjRef;
+        let collider = this.scene.physics.add.collider(ballRef.normalBall, this.normalStone, () => {
             if (!this.iscollidet) {
                 this.iscollidet = true;
                 this.hitAudio.play();
-                this.ballRef.invertBallVelocityDirection();
-                this.ballRef.changeSpeedRandom();
+                ballRef.invertBallVelocityDirection();
+                ballRef.changeSpeedRandom();
                 GAME_DATA.GAME_SCORE_SYSTEM.CURRENT_SCORE += this.score;
                 this.takeDamage();
                 this.checkDead();

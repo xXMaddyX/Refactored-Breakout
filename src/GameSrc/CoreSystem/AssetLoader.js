@@ -5,6 +5,7 @@ import PlayerPaddelSheet from "../Assets/SpriteAssets/playerAssets/PaddelBreak.p
 //Ball Sprite Imports
 import NormalBall from "../Assets/SpriteAssets/playerAssets/NormalBall.png";
 import BombBall from "../Assets/SpriteAssets/playerAssets/BombBallSheet.png";
+import TrippleBall from "../Assets/SpriteAssets/playerAssets/TrippleBall.png";
 import BallHitWall from "../Assets/AudioAssets/BallAudios/BallHitWall.wav";
 import BallHitStone from "../Assets/AudioAssets/BallAudios/BallHitStone.wav";
 
@@ -70,6 +71,7 @@ export {
     BombBall,
     BallHitWall,
     BallHitStone,
+    TrippleBall,
     
     //UI EXPORTS
     UI_Crushed_it,

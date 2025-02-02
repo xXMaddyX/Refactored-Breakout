@@ -21,12 +21,16 @@ export default class Level4Scene extends Phaser.Scene {
         this.scene = scene;
         this.stopLoop = false;
 
+        //STONE_POOLS------------>
         this.NormalStonePool = [];
         this.RedStonePool = [];
         this.solidStonePool = [];
         this.NormalLilaStonePool = [];
         this.LilaBombStonePool = [];
         this.normalAiStonePool = [];
+
+        //BALL_POOL-------------->
+        this.NormalBallPool = [];
 
         this.poolStates = {
             NormalStonePoolEmpty: false,
@@ -65,6 +69,7 @@ export default class Level4Scene extends Phaser.Scene {
         
         //ADD START BALL------------------------------->
         this.normalBall = new NormalBallObj(this);
+        this.normalBall.IS_MAIN_BALL = true;
         this.normalBall.create();
         this.player.addBallRef(this.normalBall);
         this.normalBall.addPlayerRef(this.player, this.map)
@@ -82,6 +87,10 @@ export default class Level4Scene extends Phaser.Scene {
 
         //ADD STONES TO POOLS AND GENERATE!!!!!!!!!!!!!!
         this.NormalStonePool = this.stoneGenerator.generateStoneMap(stoneConfigLvL4.normal_stones, "normal-stone");
+
+        this.time.delayedCall(5000, () => {
+            this.ballSplitter();
+        })
     };
     addPlayerWorldCollider() {
         this.physics.add.collider(this.player.playerPaddle, this.map.leftBoder);
@@ -92,6 +101,25 @@ export default class Level4Scene extends Phaser.Scene {
         this.map.isAudioStoped = true;
         //ADD STOP AUDIO METHODE!!!!!!!!!!!!!!!!!!!!!!
         GAME_DATA.SCENE_REFS.SCENE_LOADER_REF.loadTitelScene(GAME_DATA.CURRENT_GAME_STATES.CURRENT_SCENE);
+    };
+
+    //BALL SPLITTER NEEDS RANDOM DIRECTIONS!!!!!
+    //NEED TO ADD SPLITTING STONE!!!!
+    ballSplitter() {
+        for (let i = 0; i < 3; i++) {
+            let newBall = new NormalBallObj(this);
+            newBall.BALL_IS_FIRED = true;
+            newBall.create()
+            newBall.setPosition(300, 300);
+            newBall.normalBall.setVelocity(0, 100)
+            newBall.addPlayerRef(this.player, this.map);
+            newBall.addNormalBallCollider();
+            this.NormalStonePool.forEach((normalStone) => {
+                normalStone.addOverlapBall(newBall);
+            });
+
+            this.NormalBallPool.push(newBall);
+        };
     };
 
     checkPools() {
@@ -123,6 +151,12 @@ export default class Level4Scene extends Phaser.Scene {
             this.solidStonePool.forEach((stone) => {
                 stone.update(time, delta);
             });
+
+            this.NormalBallPool = this.NormalBallPool.filter((ball) => !ball.isDestroyed);
         };
+
+        this.NormalBallPool.forEach((ball) => {
+            ball.update(time, delta)
+        });
     };
 };
