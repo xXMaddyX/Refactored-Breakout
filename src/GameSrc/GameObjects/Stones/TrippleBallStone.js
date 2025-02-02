@@ -47,7 +47,11 @@ export default class TrippleBallStone {
     };
 
     callSceneSplitBall() {
-        this.scene.ballSplitter()
+        let positionObj = {
+            posX: this.normalTrippleStone.x,
+            posY: this.normalTrippleStone.y
+        }
+        this.scene.ballSplitter(positionObj);
     };
 
     addOverlapBall(firstObjRef) {

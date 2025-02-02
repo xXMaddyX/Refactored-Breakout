@@ -109,12 +109,12 @@ export default class Level4Scene extends Phaser.Scene {
 
     //BALL SPLITTER NEEDS RANDOM DIRECTIONS!!!!!
     //NEED TO ADD SPLITTING STONE!!!!
-    ballSplitter() {
+    ballSplitter(position) {
         for (let i = 0; i < 3; i++) {
             let newBall = new NormalBallObj(this);
             newBall.BALL_IS_FIRED = true;
             newBall.create()
-            newBall.setPosition(300, 300);
+            newBall.setPosition(position.posX, position.posY);
             newBall.normalBall.setVelocity(0, 100)
             newBall.addPlayerRef(this.player, this.map);
             newBall.addNormalBallCollider();
