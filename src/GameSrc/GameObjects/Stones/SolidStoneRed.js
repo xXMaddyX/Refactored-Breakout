@@ -25,37 +25,30 @@ export default class SolidRedStone {
         scene.load.audio("solid-stone-hit", SolidStoneHitAudio);
     };
 
-    setBallRef(ballRef) {
-        /**@type {NormalBallObj} */
-        this.ballRef = ballRef;
-    };
-
     takeDamage() {
         this.HP -= 1;
     };
 
     checkDead() {
         if (this.HP <= 0) {
-            this.colliderPool.forEach(element => {
+            for (let element of this.colliderPool) {
                 element.destroy();
-            });
-            //this.solidStone.destroy();
-            //this.isDestroyed = true;
+            };
             this.startAndTimeDestroyAnim();
         } else {
             return;
-        }
+        };
     };
 
-    addOverlapBall() {
-        let collider = this.scene.physics.add.collider(this.ballRef.normalBall, this.solidStone, () => {
+    addOverlapBall(ballRef) {
+        let collider = this.scene.physics.add.collider(ballRef.normalBall, this.solidStone, () => {
             if (!this.iscollidet) {
                 this.iscollidet = true;
-                this.ballRef.invertBallVelocityDirection();
-                this.ballRef.changeSpeedRandom();
+                ballRef.invertBallVelocityDirection();
+                ballRef.changeSpeedRandom();
                 //ADD BALL SET PLAYER TO AI
                 this.audio.play();
-                if (this.ballRef.BALL_IS_BOMB_STATE) {
+                if (ballRef.BALL_IS_BOMB_STATE) {
                     this.takeDamage();
                     this.checkDead();
                 };

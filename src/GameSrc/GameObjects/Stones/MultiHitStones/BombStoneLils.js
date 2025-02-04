@@ -37,9 +37,9 @@ export default class BombStoneLila {
 
     checkDead() {
         if (this.HP <= 0) {
-            this.colliderPool.forEach(element => {
+            for (let element of this.colliderPool) {
                 element.destroy();
-            });
+            };
             this.lilaBombStone.destroy();
             this.isDestroyed = true;
         } else {
@@ -78,15 +78,14 @@ export default class BombStoneLila {
 
     addOverlapBall(firstObjRef) {
         /**@type {NormalBallObj} */
-        this.ballRef = firstObjRef;
-        let collider = this.scene.physics.add.collider(this.ballRef.normalBall, this.lilaBombStone, () => {
+        let collider = this.scene.physics.add.collider(firstObjRef.normalBall, this.lilaBombStone, () => {
             if (!this.iscollidet) {
                 this.iscollidet = true;
                 this.hitAudio.play();
-                this.ballRef.invertBallVelocityDirection();
-                this.ballRef.changeSpeedRandom();
+                firstObjRef.invertBallVelocityDirection();
+                firstObjRef.changeSpeedRandom();
                 if (this.currentDamageState == this.stoneDamageState.LOW_HP) {
-                    this.ballRef.setBallToBombState();
+                    firstObjRef.setBallToBombState();
                 };
                 GAME_DATA.GAME_SCORE_SYSTEM.CURRENT_SCORE += this.score;
                 this.takeDamage();

@@ -27,9 +27,9 @@ export default class NormalStone {
 
     checkDead() {
         if (this.HP <= 0) {
-            this.colliderPool.forEach(element => {
+            for (let element of this.colliderPool) {
                 element.destroy();
-            });
+            };
             this.normalStone.destroy();
             this.isDestroyed = true;
         } else {
@@ -37,15 +37,17 @@ export default class NormalStone {
         };
     };
 
+    /**
+     * 
+     * @param {NormalBallObj} firstObjRef 
+     */
     addOverlapBall(firstObjRef) {
-        /**@type {NormalBallObj} */
-        let ballRef = firstObjRef;
-        let collider = this.scene.physics.add.collider(ballRef.normalBall, this.normalStone, () => {
+        let collider = this.scene.physics.add.collider(firstObjRef.normalBall, this.normalStone, () => {
             if (!this.iscollidet) {
                 this.iscollidet = true;
                 this.hitAudio.play();
-                ballRef.invertBallVelocityDirection();
-                ballRef.changeSpeedRandom();
+                firstObjRef.invertBallVelocityDirection();
+                firstObjRef.changeSpeedRandom();
                 GAME_DATA.GAME_SCORE_SYSTEM.CURRENT_SCORE += this.score;
                 this.takeDamage();
                 this.checkDead();

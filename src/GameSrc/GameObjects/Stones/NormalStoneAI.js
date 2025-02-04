@@ -20,20 +20,15 @@ export default class NormalStoneAI {
         //ADD SOUNDS!!!!!!!!!!
     };
 
-    setBallRef(ballRefIn) {
-        /**@type {NormalBallObj} */
-        this.ballRef = ballRefIn;
-    };
-
     takeDamage() {
         this.HP -= 1;
     };
 
     checkDead() {
         if (this.HP <= 0) {
-            this.colliderPool.forEach(element => {
+            for (let element of this.colliderPool) {
                 element.destroy();
-            });
+            };
             this.normalStoneAi.destroy();
             this.isDestroyed = true;
         } else {
@@ -41,13 +36,17 @@ export default class NormalStoneAI {
         };
     };
 
-    addOverlapBall() {
-        let collider = this.scene.physics.add.collider(this.ballRef.normalBall, this.normalStoneAi, () => {
+    /**
+     * 
+     * @param {NormalBallObj} ballRef 
+     */
+    addOverlapBall(ballRef) {
+        let collider = this.scene.physics.add.collider(ballRef.normalBall, this.normalStoneAi, () => {
             if (!this.iscollidet) {
                 this.iscollidet = true;
-                this.ballRef.invertBallVelocityDirection();
-                this.ballRef.changeSpeedRandom();
-                this.ballRef.setPlayerToAi();
+                ballRef.invertBallVelocityDirection();
+                ballRef.changeSpeedRandom();
+                ballRef.setPlayerToAi();
                 this.takeDamage();
                 this.checkDead();
                 //PLAY AUDIO HERE!!!!!!!!!!!

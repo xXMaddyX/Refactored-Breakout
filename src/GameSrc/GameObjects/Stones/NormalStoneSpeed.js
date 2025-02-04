@@ -2,6 +2,7 @@ import Phaser from "phaser";
 import Player from "../Player/Player";
 import GAME_DATA from "../../CoreSystem/MainGameHandler";
 import { NormalStoneSpeedSprite, NormalStoneHitAudio } from "../../CoreSystem/AssetLoader";
+import NormalBallObj from "../Balls/NormalBall/NormalBall";
 
 
 export default class NormalStoneSpeed {
@@ -24,22 +25,15 @@ export default class NormalStoneSpeed {
         sceneIn.load.audio("normal-stone-speed-audio", NormalStoneHitAudio);
     };
 
-    /**
-     * @param {Player} playerRef 
-     */
-    setPlayerRef(playerRef) {
-        this.player = playerRef;
-    };
-
     takeDamage() {
         this.HP -= 1;
     };
 
     checkDead() {
         if (this.HP <= 0) {
-            this.colliderPool.forEach(element => {
+            for (let element of this.colliderPool) {
                 element.destroy();
-            });
+            };
             this.NormalStoneSpeed.destroy();
             this.isDestroyed = true;
         } else {
@@ -47,15 +41,17 @@ export default class NormalStoneSpeed {
         };
     };
 
+    /**
+     * 
+     * @param {NormalBallObj} firstObjRef 
+     */
     addOverlapBall(firstObjRef) {
-        /**@type {NormalBallObj} */
-        this.ballRef = firstObjRef;
-        let collider = this.scene.physics.add.collider(this.ballRef.normalBall, this.NormalStoneSpeed, () => {
+        let collider = this.scene.physics.add.collider(firstObjRef.normalBall, this.NormalStoneSpeed, () => {
             if (!this.iscollidet) {
                 this.iscollidet = true;
                 this.hitAudio.play();
-                this.ballRef.invertBallVelocityDirection();
-                this.ballRef.changeSpeedRandom();
+                firstObjRef.invertBallVelocityDirection();
+                firstObjRef.changeSpeedRandom();
                 this.player.setPlayerOnSpeedBuff(this.PLAYER_SPEED_BUFF_MULTI);
                 GAME_DATA.GAME_SCORE_SYSTEM.CURRENT_SCORE += this.score;
                 this.takeDamage();

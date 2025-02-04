@@ -27,9 +27,9 @@ export default class RedStone {
 
     checkDead() {
         if (this.HP <= 0) {
-            this.colliderPool.forEach(element => {
+            for (let element of this.colliderPool) {
                 element.destroy();
-            });
+            };
             this.redStone.destroy();
             this.isDestroyed = true;
         } else {
@@ -38,15 +38,13 @@ export default class RedStone {
     };
 
     addOverlapBall(firstObjRef) {
-        /**@type {NormalBallObj} */
-        this.ballRef = firstObjRef;
-        let collider = this.scene.physics.add.collider(this.ballRef.normalBall, this.redStone, () => {
+        let collider = this.scene.physics.add.collider(firstObjRef.normalBall, this.redStone, () => {
             if (!this.iscollidet) {
                 this.iscollidet = true;
                 this.hitAudio.play();
                 GAME_DATA.GAME_SCORE_SYSTEM.CURRENT_SCORE += this.score;
-                this.ballRef.invertBallVelocityDirection();
-                this.ballRef.changeSpeedRandom();
+                firstObjRef.invertBallVelocityDirection();
+                firstObjRef.changeSpeedRandom();
                 this.takeDamage();
                 this.checkDead();
                 this.scene.time.delayedCall(1000, () => {

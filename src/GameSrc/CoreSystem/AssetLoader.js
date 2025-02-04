@@ -60,6 +60,7 @@ import LvL3Music from "../Assets/AudioAssets/LvLAudios/MusicLvL3.wav";
 
 //Level4 Imports
 import BackgroundLvL4 from "../Assets/SpriteAssets/Backgrounds/Level4Background/BackgroundWaben.png";
+import BieneAnimation from "../Assets/SpriteAssets/EnvAssets/biene_sheet.png";
 
 
 export {
@@ -109,11 +110,17 @@ export {
 
     //LEVEL_EXPORTS
     BackgroundLvL1,
+
     BackgroundLvL2,
+
     BackgroundLvL3,
+
     BackgroundLvL4,
+    BieneAnimation,
     
     LvL1Music,
+
     LvL2Music,
+    
     LvL3Music
 };

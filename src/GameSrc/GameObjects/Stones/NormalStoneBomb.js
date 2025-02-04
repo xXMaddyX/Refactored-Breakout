@@ -22,20 +22,15 @@ export default class NormalBombStone {
         //LOAD BOMB STONE AUDIO!!!!!
     };
 
-    setBallRef(ballRef) {
-        /**@type {NormalBallObj} */
-        this.ballRef = ballRef;
-    };
-
     takeDamage() {
         this.HP -= 1;
     };
 
     checkDead() {
         if (this.HP <= 0) {
-            this.colliderPool.forEach(element => {
+            for (let element of this.colliderPool) {
                 element.destroy();
-            });
+            };
             this.normalStoneBomb.destroy();
             this.isDestroyed = true;
         } else {
@@ -43,13 +38,13 @@ export default class NormalBombStone {
         };
     };
 
-    addOverlapBall() {
-        let collider = this.scene.physics.add.collider(this.ballRef.normalBall, this.normalStoneBomb, () => {
+    addOverlapBall(ballRef) {
+        let collider = this.scene.physics.add.collider(ballRef.normalBall, this.normalStoneBomb, () => {
             if (!this.iscollidet) {
                 this.iscollidet = true;
-                this.ballRef.invertBallVelocityDirection();
-                this.ballRef.changeSpeedRandom();
-                this.ballRef.setBallToBombState();
+                ballRef.invertBallVelocityDirection();
+                ballRef.changeSpeedRandom();
+                ballRef.setBallToBombState();
                 GAME_DATA.GAME_SCORE_SYSTEM.CURRENT_SCORE += this.score;
                 this.takeDamage();
                 this.checkDead();

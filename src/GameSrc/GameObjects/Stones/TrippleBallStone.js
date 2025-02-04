@@ -33,12 +33,12 @@ export default class TrippleBallStone {
 
     ceckDead() {
         if (this.HP <= 0) {
-            this.colliderPool.forEach(collider => {
+            for (let collider of this.colliderPool) {
                 if (!this.splitBallisCalled) {
                     this.callSceneSplitBall();
                 };
                 collider.destroy();
-            });
+            };
             this.normalTrippleStone.destroy();
             this.isDestroyed = true;
         } else {
@@ -54,9 +54,11 @@ export default class TrippleBallStone {
         this.scene.ballSplitter(positionObj);
     };
 
-    addOverlapBall(firstObjRef) {
-        /**@type {NormalBallObj} */
-        let ballRef = firstObjRef;
+    /**
+     * 
+     * @param {NormalBallObj} ballRef 
+     */
+    addOverlapBall(ballRef) {
         let collider = this.scene.physics.add.collider(ballRef.normalBall, this.normalTrippleStone, () => {
             if (!this.isCollidet) {
                 this.isCollidet = true;

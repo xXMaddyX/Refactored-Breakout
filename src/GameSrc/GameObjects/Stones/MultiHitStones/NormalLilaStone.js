@@ -1,6 +1,7 @@
 import Phaser from "phaser";
 import { NormalStoneLilaSprite, NormalStoneSprite, NormalStoneYellowSprite, NormalStoneHitAudio } from "../../../CoreSystem/AssetLoader";
 import GAME_DATA from "../../../CoreSystem/MainGameHandler";
+import NormalBallObj from "../../Balls/NormalBall/NormalBall";
 
 export default class NormalLilaStone {
     constructor(scene) {
@@ -50,9 +51,9 @@ export default class NormalLilaStone {
 
     checkDead() {
         if (this.HP <= 0) {
-            this.colliderPool.forEach(element => {
+            for (let element of this.colliderPool) {
                 element.destroy();
-            });
+            };
             this.normalLilaStone.destroy();
             this.isDestroyed = true;
         } else {
@@ -77,15 +78,18 @@ export default class NormalLilaStone {
         };
     };
 
+    /**
+     * 
+     * @param {NormalBallObj} firstObjRef 
+     */
     addOverlapBall(firstObjRef) {
         /**@type {NormalBallObj} */
-        this.ballRef = firstObjRef;
-        let collider = this.scene.physics.add.collider(this.ballRef.normalBall, this.normalLilaStone, () => {
+        let collider = this.scene.physics.add.collider(firstObjRef.normalBall, this.normalLilaStone, () => {
             if (!this.iscollidet) {
                 this.iscollidet = true;
                 this.hitAudio.play();
-                this.ballRef.invertBallVelocityDirection();
-                this.ballRef.changeSpeedRandom();
+                firstObjRef.invertBallVelocityDirection();
+                firstObjRef.changeSpeedRandom();
                 GAME_DATA.GAME_SCORE_SYSTEM.CURRENT_SCORE += this.score;
                 this.takeDamage();
                 this.checkDead();

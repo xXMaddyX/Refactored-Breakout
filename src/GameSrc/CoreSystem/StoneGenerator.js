@@ -33,101 +33,97 @@ export default class StoneGenerator {
         let stoneArr = [];
         switch (stoneType) {
             case "normal-stone":
-                map.forEach(({x, y, scale, depth}) => {
+                for (let {x, y, scale, depth} of map) {
                     /**@type {NormalStone} */
                     let newStone = new NormalStone(this.scene);
                     newStone.create(x, y, scale, depth);
                     newStone.addOverlapBall(this.ball);
-    
                     stoneArr.push(newStone);
-                });
+                };
                 break;
 
             case "red-stone":
-                map.forEach(({x, y, scale, depth}) => {
+                for (let {x, y, scale, depth} of map) {
                     /**@type {RedStone} */
                     let newStone = new RedStone(this.scene);
                     newStone.create(x, y, scale, depth);
                     newStone.addOverlapBall(this.ball);
-    
                     stoneArr.push(newStone);
-                });
+                };
                 break;
 
             case "solid-stone-red":
-                map.forEach(({x, y, scale, depth}) => {
+                for (let {x, y, scale, depth} of map) {
                     /**@type {SolidRedStone} */
                     let newStone = new SolidRedStone(this.scene);
-                    newStone.setBallRef(this.ball);
                     newStone.create(x, y, scale, depth);
-                    newStone.addOverlapBall();
+                    newStone.addOverlapBall(this.ball);
                     stoneArr.push(newStone);
-                });
+                };
                 break;
 
+                //FIX BALL REF PROBLEM
             case "normal-stone-bomb":
-                map.forEach(({x, y, scale, depth}) => {
+                for (let {x, y, scale, depth} of map) {
                     /**@type {NormalBombStone} */
                     let newStone = new NormalBombStone(this.scene);
-                    newStone.setBallRef(this.ball);
                     newStone.create(x, y, scale, depth);
-                    newStone.addOverlapBall();
+                    newStone.addOverlapBall(this.ball);
                     stoneArr.push(newStone);
-                });
+                };
                 break;
 
             case "normal-stone-ai":
-                map.forEach(({x, y, scale, depth}) => {
+                for (let {x, y, scale, depth} of map) {
                     /**@type {NormalStoneAI} */
                     let newStone = new NormalStoneAI(this.scene);
-                    newStone.setBallRef(this.ball);
                     newStone.create(x, y, scale, depth);
-                    newStone.addOverlapBall();
+                    newStone.addOverlapBall(this.ball);
                     stoneArr.push(newStone);
-                });
+                };
                 break;
 
             case "normal-lila-stone":
-                map.forEach(({x, y, scale, depth}) => {
+                for (let {x, y, scale, depth} of map) {
                     /**@type {NormalLilaStone} */
                     let newStone = new NormalLilaStone(this.scene);
                     newStone.create(x, y, scale, depth);
                     newStone.addOverlapBall(this.ball);
                     stoneArr.push(newStone);
-                });
+                };
                 break;
 
             case "Lila-bomb-stone":
-                map.forEach(({x, y, scale, depth}) => {
+                for (let {x, y, scale, depth} of map) {
                     /**@type {BombStoneLila} */
                     let newStone = new BombStoneLila(this.scene);
                     newStone.create(x, y, scale, depth);
                     newStone.addOverlapBall(this.ball);
                     stoneArr.push(newStone);
-                });
+                };
                 break;
 
             case "normal-stone-speed":
-                map.forEach(({x, y, scale, depth}) => {
+                for (let {x, y, scale, depth} of map) {
                     /**@type {NormalStoneSpeed} */
                     let newStone = new NormalStoneSpeed(this.scene);
                     newStone.create(x, y, scale, depth);
                     newStone.addOverlapBall(this.ball);
                     newStone.setPlayerRef(this.scene.player);
                     stoneArr.push(newStone);
-                });
+                };
                 break;
 
             case "normal-tripple-stone":
-                map.forEach(({x, y, scale, depth}) => {
+                for (let {x, y, scale, depth} of map) {
                     /**@type {TrippleBallStone} */
                     let newStone = new TrippleBallStone(this.scene);
                     newStone.create(x, y, scale, depth);
                     newStone.addOverlapBall(this.ball);
                     stoneArr.push(newStone);
-                });
+                }
                 break;
         }
         return stoneArr;
-    }
-}
+    };
+};

@@ -53,6 +53,7 @@ export default class Level1Scene extends Phaser.Scene {
         
         //ADD START BALL------------------------->
         this.normalBall = new NormalBallObj(this);
+        this.normalBall.IS_MAIN_BALL = true;
         this.normalBall.create();
         this.player.addBallRef(this.normalBall);
         this.normalBall.addPlayerRef(this.player, this.map);

@@ -14,6 +14,8 @@ import SolidRedStone from "../../../GameObjects/Stones/SolidStoneRed.js";
 import GAME_DATA from "../../../CoreSystem/MainGameHandler.js";
 import BombStoneLila from "../../../GameObjects/Stones/MultiHitStones/BombStoneLils.js";
 import TrippleBallStone from "../../../GameObjects/Stones/TrippleBallStone.js";
+import { ballSplitterFunc } from "../../../CoreSystem/BallSplitter.js";
+import Biene from "../../../GameObjects/EnvObjects/Biene.js";
 
 export default class Level4Scene extends Phaser.Scene {
     constructor(scene) {
@@ -31,6 +33,8 @@ export default class Level4Scene extends Phaser.Scene {
         this.normalAiStonePool = [];
         this.NormalTrippleStonesPool = [];
 
+        this.bienenPool = [];
+
         //BALL_POOL-------------->
         this.NormalBallPool = [];
 
@@ -40,6 +44,7 @@ export default class Level4Scene extends Phaser.Scene {
             SolidStonePoolEmpty: false,
             NormalLilaStonePoolEmpty: false,
             LilaBombStonePoolEmpty: false,
+            NormalTrippleStonePoolEmpty: false,
         };
 
     };
@@ -56,6 +61,7 @@ export default class Level4Scene extends Phaser.Scene {
         BombStoneLila.loadSprites(this);
         NormalLilaStone.loadSprites(this);
         TrippleBallStone.loadSprite(this);
+        Biene.loadSprites(this);
     };
 
     create() {
@@ -91,10 +97,15 @@ export default class Level4Scene extends Phaser.Scene {
         //ADD STONES TO POOLS AND GENERATE!!!!!!!!!!!!!!
         this.NormalStonePool = this.stoneGenerator.generateStoneMap(stoneConfigLvL4.normal_stones, "normal-stone");
         this.NormalTrippleStonesPool = this.stoneGenerator.generateStoneMap(stoneConfigLvL4.normal_tripple_stones, "normal-tripple-stone");
+        this.RedStonePool = this.stoneGenerator.generateStoneMap(stoneConfigLvL4.red_stones, "red-stone");
+        this.NormalLilaStonePool = this.stoneGenerator.generateStoneMap(stoneConfigLvL4.lila_stones, "normal-lila-stone");
 
-        //this.time.delayedCall(5000, () => {
-            //this.ballSplitter();
-        //})
+        for (let biene of stoneConfigLvL4.bienen_positions) {
+            let {y, scale, depth, direction, inizialPositions, flipH} = biene;
+            let newBiene = new Biene(this);
+            newBiene.create(y, scale, depth, direction, inizialPositions, flipH);
+            this.bienenPool.push(newBiene);
+        };
     };
     addPlayerWorldCollider() {
         this.physics.add.collider(this.player.playerPaddle, this.map.leftBoder);
@@ -107,31 +118,17 @@ export default class Level4Scene extends Phaser.Scene {
         GAME_DATA.SCENE_REFS.SCENE_LOADER_REF.loadTitelScene(GAME_DATA.CURRENT_GAME_STATES.CURRENT_SCENE);
     };
 
-    //BALL SPLITTER NEEDS RANDOM DIRECTIONS!!!!!
-    //NEED TO ADD SPLITTING STONE!!!!
     ballSplitter(position) {
-        for (let i = 0; i < 3; i++) {
-            let newBall = new NormalBallObj(this);
-            newBall.BALL_IS_FIRED = true;
-            newBall.create()
-            newBall.setPosition(position.posX, position.posY);
-            newBall.normalBall.setVelocity(0, 100)
-            newBall.addPlayerRef(this.player, this.map);
-            newBall.addNormalBallCollider();
-            this.NormalStonePool.forEach((normalStone) => {
-                normalStone.addOverlapBall(newBall);
-            });
-
-            this.NormalBallPool.push(newBall);
-        };
-    };
+        ballSplitterFunc(this, position);
+    }
 
     checkPools() {
         if (
             this.NormalStonePool == 0 &&
             this.LilaBombStonePool == 0 &&
             this.NormalLilaStonePool == 0 &&
-            this.solidStonePool
+            this.solidStonePool == 0 &&
+            this.NormalTrippleStonesPool == 0
         ) {
             this.stopLoop = true;
             this.player.playerPaddle.setVelocity(0);
@@ -144,23 +141,39 @@ export default class Level4Scene extends Phaser.Scene {
         };
     };
 
+    updatePools() {
+        this.NormalStonePool = this.NormalStonePool.filter((stone) => !stone.isDestroyed);
+        this.RedStonePool = this.RedStonePool.filter((stone) => !stone.isDestroyed);
+        this.solidStonePool = this.solidStonePool.filter((stone) => !stone.isDestroyed);
+        this.NormalLilaStonePool = this.NormalLilaStonePool.filter((stone) => !stone.isDestroyed);
+        this.LilaBombStonePool = this.LilaBombStonePool.filter((stone) => !stone.isDestroyed);
+        this.normalAiStonePool = this.normalAiStonePool.filter((stone) => !stone.isDestroyed);
+        this.NormalTrippleStonesPool = this.NormalTrippleStonesPool.filter((stone) => !stone.isDestroyed);
+    };
+
+    updateEnvObjs(time, delta) {
+        for (let biene of this.bienenPool) {
+            biene.update(time, delta);
+        }
+    };
+
     update(time, delta) {
         if (!this.stopLoop) {
             this.map.update(time, delta);
             this.player.update(time, delta);
             this.UI.update(time, delta);
             this.normalBall.update(time, delta);
+            this.updateEnvObjs(time, delta)
+            this.updatePools();
             this.checkPools();
 
-            this.solidStonePool.forEach((stone) => {
+            for (let stone of this.solidStonePool) {
                 stone.update(time, delta);
-            });
-
-            this.NormalBallPool = this.NormalBallPool.filter((ball) => !ball.isDestroyed);
+            };
         };
 
-        this.NormalBallPool.forEach((ball) => {
+        for (let ball of this.NormalBallPool) {
             ball.update(time, delta)
-        });
+        };
     };
 };
