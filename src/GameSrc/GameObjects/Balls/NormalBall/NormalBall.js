@@ -82,7 +82,7 @@ export default class NormalBallObj {
         
         //NEED TO FIX POSTFX LAG; MAYBE SHADER!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         if (this.IS_MAIN_BALL) {
-            this.glow = this.normalBall.postFX.addGlow("0x39FF14" , 0, undefined, undefined, undefined, 20);
+            this.glow = this.normalBall.postFX.addGlow("0x39FF14" , 0, 0, false, 0.1, 20);
             this.initAnimations();
         }
         this.normalBall.postFX.addShadow(-1, 1, 0.02);
@@ -199,11 +199,13 @@ export default class NormalBallObj {
     
     update(time, delta) {
         if (!this.isDestroyed) {
-            NormalBallMoveHandler.checkBallMove(this);
             if (this.IS_MAIN_BALL) {this.glowChanger(delta);};
             this.checkIfBallIsfired();
         }
-        if (this.BALL_IS_FIRED && !this.isDestroyed) {NormalBallMoveHandler.checkIfBallIsntMove(this);};
+        if (this.BALL_IS_FIRED && !this.isDestroyed) {
+            NormalBallMoveHandler.checkBallMove(this);
+            NormalBallMoveHandler.checkIfBallIsntMove(this);
+        };
         if (!this.IS_MAIN_BALL) {this.checkBallDeath();};
     };
 };

@@ -68,9 +68,7 @@ export default class TrippleBallStone {
                 GAME_DATA.GAME_SCORE_SYSTEM.CURRENT_SCORE += this.score;
                 this.takeDamage();
                 this.ceckDead();
-                this.scene.time.delayedCall(1000, () => {
-                    this.isCollidet = false;
-                });
+                this.isCollidet = false;
             };
         });
         this.colliderPool.push(collider);

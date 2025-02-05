@@ -9,7 +9,6 @@ export default class NormalStone {
         this.scene = scene;
         this.HP = 1;
         this.isDestroyed = false;
-        this.iscollidet = false;
         this.score = 50;
         this.colliderPool = [];
     };
@@ -28,7 +27,7 @@ export default class NormalStone {
     checkDead() {
         if (this.HP <= 0) {
             for (let element of this.colliderPool) {
-                element.destroy();
+                element.collider.destroy();
             };
             this.normalStone.destroy();
             this.isDestroyed = true;
@@ -42,21 +41,23 @@ export default class NormalStone {
      * @param {NormalBallObj} firstObjRef 
      */
     addOverlapBall(firstObjRef) {
-        let collider = this.scene.physics.add.collider(firstObjRef.normalBall, this.normalStone, () => {
-            if (!this.iscollidet) {
-                this.iscollidet = true;
+        let collistionObj = {
+            isCollidet: false,
+            collider: null
+        };
+        collistionObj.collider = this.scene.physics.add.collider(firstObjRef.normalBall, this.normalStone, () => {
+            if (!collistionObj.isCollidet) {
+                collistionObj.isCollidet = true;
                 this.hitAudio.play();
                 firstObjRef.invertBallVelocityDirection();
                 firstObjRef.changeSpeedRandom();
                 GAME_DATA.GAME_SCORE_SYSTEM.CURRENT_SCORE += this.score;
                 this.takeDamage();
                 this.checkDead();
-                this.scene.time.delayedCall(1000, () => {
-                    this.iscollidet = false;
-                });
+                collistionObj.isCollidet = false;
             };
         });
-        this.colliderPool.push(collider);
+        this.colliderPool.push(collistionObj);
     }
 
     create(x, y, scale, depth) {

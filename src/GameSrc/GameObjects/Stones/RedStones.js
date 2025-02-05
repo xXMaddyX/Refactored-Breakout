@@ -37,6 +37,10 @@ export default class RedStone {
         }
     };
 
+    /**
+     * 
+     * @param {NormalBallObj} firstObjRef 
+     */
     addOverlapBall(firstObjRef) {
         let collider = this.scene.physics.add.collider(firstObjRef.normalBall, this.redStone, () => {
             if (!this.iscollidet) {
@@ -47,9 +51,7 @@ export default class RedStone {
                 firstObjRef.changeSpeedRandom();
                 this.takeDamage();
                 this.checkDead();
-                this.scene.time.delayedCall(1000, () => {
-                    this.iscollidet = false;
-                });
+                this.iscollidet = false;
             };
         });
         this.colliderPool.push(collider);

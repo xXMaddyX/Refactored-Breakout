@@ -35,9 +35,9 @@ export default class NormalBallMoveHandler {
             ball.currentMoveDirectionY = ball.BALL_MOVE_Y.UP;
         };
         
-        const newDirection = Phaser.Math.RND.pick([ball.BALL_MOVE_X.LEFT, ball.BALL_MOVE_X.RIGHT]);
-        ball.normalBall.setVelocityX(newDirection * ball.SPEED);
-        ball.currentMoveDirectionX = newDirection;
+        const newDirectionX = Phaser.Math.RND.pick([ball.BALL_MOVE_X.LEFT, ball.BALL_MOVE_X.RIGHT]);
+        ball.normalBall.setVelocityX(newDirectionX * ball.SPEED);
+        ball.currentMoveDirectionX = newDirectionX;
     };
     /**
      * 

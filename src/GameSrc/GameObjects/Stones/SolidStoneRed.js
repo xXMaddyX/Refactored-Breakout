@@ -40,6 +40,10 @@ export default class SolidRedStone {
         };
     };
 
+    /**
+     * 
+     * @param {NormalBallObj} ballRef 
+     */
     addOverlapBall(ballRef) {
         let collider = this.scene.physics.add.collider(ballRef.normalBall, this.solidStone, () => {
             if (!this.iscollidet) {
