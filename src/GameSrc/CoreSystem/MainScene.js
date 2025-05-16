@@ -23,7 +23,7 @@ export default class MainScene extends Phaser.Scene {
     };
 
     initOnStartup() {
-        this.sceneLoader.loadTitelScene();
+        this.sceneLoader.loadLevel4();
     };
 
     setUIRef(uiRef) {

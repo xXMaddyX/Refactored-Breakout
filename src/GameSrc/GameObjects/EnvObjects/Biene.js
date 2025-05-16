@@ -44,7 +44,7 @@ export default class Biene {
         this.biene.setScale(scale * flipH, scale);
         this.biene.setDepth(depth);
         this.biene.anims.play("biene-anim");
-        this.biene.postFX.addShadow(-1, 1, 0.02);
+        this.biene.postFX.addShadow(-1, 1, 0.01);
     };
 
     moveBiene() {
